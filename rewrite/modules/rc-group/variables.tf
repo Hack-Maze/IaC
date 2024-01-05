@@ -1,7 +1,7 @@
 variable "name" {
   description = "The name of the Azure resource group"
   type        = string
-  default     = "hackmaze-group"
+  default     = "hackmaze-rc"
 }
 
 variable "location" {

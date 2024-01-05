@@ -1,10 +1,9 @@
 
-resource "azurerm_network_security_group" "hackmaze-control-sg-01" {
-  name                = "hackmaze-control-sg-01"
-  location            = azurerm_resource_group.hackmaze-group.location
-  resource_group_name = azurerm_resource_group.hackmaze-group.name
-  tags                = azurerm_resource_group.hackmaze-group.tags
-
+resource "azurerm_network_security_group" "control-sg-01" {
+  name                = "control-sg-01"
+  location            = module.rc-group.location
+  resource_group_name = module.rc-group.name
+  tags                = module.rc-group.tags
 }
 
 
@@ -20,8 +19,8 @@ resource "azurerm_network_security_rule" "api_server_rule" {
   destination_port_range      = "6443"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
 resource "azurerm_network_security_rule" "ETCD" {
@@ -34,8 +33,8 @@ resource "azurerm_network_security_rule" "ETCD" {
   destination_port_range      = "2379-2380"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
 resource "azurerm_network_security_rule" "kubelet_rule" {
@@ -48,8 +47,8 @@ resource "azurerm_network_security_rule" "kubelet_rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
 resource "azurerm_network_security_rule" "kube-scheduler-rule" {
@@ -62,8 +61,8 @@ resource "azurerm_network_security_rule" "kube-scheduler-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
 resource "azurerm_network_security_rule" "kube-controller-manager-rule" {
@@ -76,8 +75,8 @@ resource "azurerm_network_security_rule" "kube-controller-manager-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
 resource "azurerm_network_security_rule" "NodePort-rule" {
@@ -90,11 +89,11 @@ resource "azurerm_network_security_rule" "NodePort-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
-resource "azurerm_network_security_rule" "ssh_rule" {
+resource "azurerm_network_security_rule" "ssh_control_rule" {
   name                        = "AllowSSH22"
   priority                    = 106
   direction                   = "Inbound"
@@ -104,14 +103,14 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.hackmaze-group.name
-  network_security_group_name = azurerm_network_security_group.hackmaze-control-sg-01.name
+  resource_group_name         = module.rc-group.name
+  network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
 
 # resource "azurerm_subnet_network_security_group_association" "hackmaze-sga-01" {
 #   subnet_id                 = azurerm_subnet.hackmaze-subnet-01.id
-#   network_security_group_id = azurerm_network_security_group.hackmaze-control-sg-01.id
+#   network_security_group_id = azurerm_network_security_group.control-sg-01.id
 # }
 
 

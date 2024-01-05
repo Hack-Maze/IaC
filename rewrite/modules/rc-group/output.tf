@@ -1,9 +1,9 @@
 
-output "rc_name" {
+output "name" {
   value = var.name
 }
 
-output "rc-location" {
+output "location" {
   value = var.location
 }
 

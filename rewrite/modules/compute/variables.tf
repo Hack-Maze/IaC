@@ -43,6 +43,15 @@ variable "worker2_static_private_ip" {
   type        = string
   default     = "10.244.0.4"  # Update with your desired static IP
 }
+
+variable "worker_static_private_ips" {
+  type = map(string)
+  default = {
+    "1" = "10.244.0.3"  # Define your private IPs here for each worker
+    "2" = "10.244.0.4"  # Adjust with your actual IPs
+    # Add more IPs as needed
+  }
+}
 variable "jump_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string

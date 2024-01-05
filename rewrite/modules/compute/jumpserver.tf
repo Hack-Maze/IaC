@@ -1,18 +1,5 @@
 
 
-module "rc-group" {
- source = "../rc-group"
- 
- 
- // ... other variables
-}
-module "network" {
- source = "../network"
- 
- 
- // ... other variables
-}
-
 
 
 # Jump Server
@@ -48,7 +35,7 @@ resource "azurerm_linux_virtual_machine" "jump_server" {
 
  admin_ssh_key {
     username   = var.admin_username
-    public_key = file(var.admin_ssh_public_key_path)
+    public_key = tls_private_key.jump_server_ssh_key.public_key_openssh
  }
 
  os_disk {

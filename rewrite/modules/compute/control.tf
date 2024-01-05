@@ -9,18 +9,6 @@
 #   tags = azurerm_resource_group.hackmaze-group.tags
 # }
 
-module "rc-group" {
- source = "../rc-group"
- 
- 
- // ... other variables
-}
-module "network" {
- source = "../network"
- 
- 
- // ... other variables
-}
 
 
 
@@ -49,10 +37,10 @@ resource "azurerm_linux_virtual_machine" "hackmaze-control-vm-01" {
   admin_username        = var.admin_username  # Use the variable here
   network_interface_ids = [azurerm_network_interface.nic-control-01.id]
 
-  admin_ssh_key {
-    username   = var.admin_username  # Use the variable here
-    public_key = file(var.admin_ssh_public_key_path)  # Use the variable here
-  }
+ admin_ssh_key {
+    username   = var.admin_username
+    public_key = tls_private_key.control_server_ssh_key.public_key_openssh
+ }
 
   os_disk {
     caching              = "ReadWrite"
