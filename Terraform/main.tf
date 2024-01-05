@@ -171,6 +171,59 @@ resource "azurerm_subnet_network_security_group_association" "test-sga-01" {
 
 
 
+# Jump Server
+resource "azurerm_public_ip" "jump_server_ip" {
+ name               = "jump-server-ip"
+ resource_group_name = azurerm_resource_group.test-group.name
+ location           = azurerm_resource_group.test-group.location
+ allocation_method  = "Dynamic"
+ tags = azurerm_resource_group.test-group.tags
+}
+
+resource "azurerm_network_interface" "jump_server_nic" {
+ name               = "jump-server-nic"
+ location           = azurerm_resource_group.test-group.location
+ resource_group_name = azurerm_resource_group.test-group.name
+
+ ip_configuration {
+   name                        = "internal"
+   subnet_id                   = azurerm_subnet.test-subnet-01.id
+   private_ip_address_allocation = "Dynamic"
+   public_ip_address_id         = azurerm_public_ip.jump_server_ip.id
+ }
+ tags = azurerm_resource_group.test-group.tags
+}
+
+resource "azurerm_linux_virtual_machine" "jump_server" {
+ name                = "jump-server"
+ resource_group_name  = azurerm_resource_group.test-group.name
+ location             = azurerm_resource_group.test-group.location
+ size                = "Standard_B2s"
+ admin_username       = "test-user"
+ network_interface_ids = [azurerm_network_interface.jump_server_nic.id]
+
+ admin_ssh_key {
+   username  = "test-user"
+   public_key = file("~/.ssh/test-azure-key.pub")
+ }
+
+ os_disk {
+   caching             = "ReadWrite"
+   storage_account_type = "Standard_LRS"
+ }
+
+ source_image_reference {
+   publisher = "Canonical"
+   offer    = "0001-com-ubuntu-server-jammy"
+   sku      = "22_04-lts-gen2"
+   version  = "latest"
+ }
+}
+
+
+
+
+
 resource "azurerm_public_ip" "test-ip-control-01" {
   name                = "test-ip-control-01"
   resource_group_name = azurerm_resource_group.test-group.name
