@@ -10,3 +10,11 @@ output "vnet_address_range" {
 output "subnet_id" {
   value = azurerm_subnet.hackmaze-subnet-01.id
 }
+
+output "jump_public_ip_id" {
+  value = azurerm_public_ip.jump_server_ip.id
+}
+
+output "jump_public_ip" {
+  value = azurerm_public_ip.jump_server_ip.ip_address
+}

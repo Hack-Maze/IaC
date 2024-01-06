@@ -1,32 +1,32 @@
 #worker 1
 resource "azurerm_availability_set" "worker-set" {
   name                = "worker-set"
-  location            = module.rc-group.location
-  resource_group_name = module.rc-group.name
+  location            = var.rc-location
+  resource_group_name = var.rc-name
 }
 
 
 resource "azurerm_network_interface" "nic-worker-01" {
   name                = "nic-worker-01"
-  location            = module.rc-group.location
-  resource_group_name = module.rc-group.name
+  location            = var.rc-location
+  resource_group_name = var.rc-name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = module.network.subnet_id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.worker1_static_private_ip  # Use the variable here
   }
 
-  tags = module.rc-group.tags
+  tags = var.rc-tags
 }
 
 
 
 resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-01" {
   name                  = "hackmaze-worker-vm-01"
-  location              = module.rc-group.location
-  resource_group_name   = module.rc-group.name
+  location              = var.rc-location
+  resource_group_name   = var.rc-name
   size                  = var.worker_vm_size
   admin_username        = var.admin_username
   network_interface_ids = [azurerm_network_interface.nic-worker-01.id]
@@ -64,25 +64,25 @@ resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-01" {
 
 resource "azurerm_network_interface" "nic-worker-02" {
   name                = "nic-worker-02"
-  location              = module.rc-group.location
-  resource_group_name   = module.rc-group.name
+  location              = var.rc-location
+  resource_group_name   = var.rc-name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = module.network.subnet_id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.worker2_static_private_ip  # Use the variable here
   }
 
-  tags = module.rc-group.tags
+  tags = var.rc-tags
 }
 
 
 
 resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-02" {
   name                  = "hackmaze-worker-vm-02"
-  location            = module.rc-group.location
-  resource_group_name = module.rc-group.name
+  location              = var.rc-location
+  resource_group_name   = var.rc-name
   size                  = var.worker_vm_size
   admin_username        = var.admin_username
   network_interface_ids = [azurerm_network_interface.nic-worker-02.id]

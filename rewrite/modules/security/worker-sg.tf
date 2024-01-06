@@ -1,9 +1,9 @@
 
 resource "azurerm_network_security_group" "worker-sg-01" {
   name                = "worker-sg-01"
-  location            = module.rc-group.location
-  resource_group_name = module.rc-group.name
-  tags                = module.rc-group.tags
+  location            = var.rc-location
+  resource_group_name = var.rc-name
+  tags                = var.rc-tags
 }
 
 
@@ -19,7 +19,7 @@ resource "azurerm_network_security_rule" "NodePort_worker-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.worker-sg-01.name
 }
 
@@ -33,7 +33,7 @@ resource "azurerm_network_security_rule" "kubelet_worker_rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.worker-sg-01.name
 }
 

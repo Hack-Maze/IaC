@@ -3,32 +3,28 @@
 
 
 # Jump Server
-resource "azurerm_public_ip" "jump_server_ip" {
- name               = "jump-server-ip"
- location            = module.rc-group.location
- resource_group_name = module.rc-group.name
- allocation_method  = "Dynamic"
- tags = module.rc-group.tags
-}
+
 
 resource "azurerm_network_interface" "jump_server_nic" {
- name               = "jump-server-nic"
- location            = module.rc-group.location
- resource_group_name = module.rc-group.name
+ name                = "jump-server-nic"
+ location            = var.rc-location
+ resource_group_name = var.rc-name
 
  ip_configuration {
     name                          = "internal"
-    subnet_id                     = module.network.subnet_id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.jump_static_private_ip  # Use the variable here
+    public_ip_address_id          = var.jump_public_ip_id
+
 }
- tags = module.rc-group.tags
+ tags = var.rc-tags
 }
 
 resource "azurerm_linux_virtual_machine" "jump_server" {
- name                = "jump-server"
- location            = module.rc-group.location
- resource_group_name = module.rc-group.name
+ name                  = "jump-server"
+ location              = var.rc-location
+ resource_group_name   = var.rc-name
  size                  = var.jump_vm_size
  admin_username        = var.admin_username
  network_interface_ids = [azurerm_network_interface.jump_server_nic.id]
@@ -39,7 +35,7 @@ resource "azurerm_linux_virtual_machine" "jump_server" {
  }
 
  os_disk {
-   caching             = "ReadWrite"
+   caching              = "ReadWrite"
    storage_account_type = "Standard_LRS"
  }
 

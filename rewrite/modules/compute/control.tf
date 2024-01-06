@@ -15,24 +15,24 @@
 
 resource "azurerm_network_interface" "nic-control-01" {
   name                = "nic-control-01"
-  location            = module.rc-group.location
-  resource_group_name = module.rc-group.name
+  location            = var.rc-location
+  resource_group_name = var.rc-name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = module.network.subnet_id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.control_static_private_ip  # Use the variable here
   }
 
-  tags = module.rc-group.tags
+  tags = var.rc-tags
 }
 
 
 resource "azurerm_linux_virtual_machine" "hackmaze-control-vm-01" {
   name                  = "hackmaze-control-vm-01"
-  location              = module.rc-group.location
-  resource_group_name   = module.rc-group.name
+  location              = var.rc-location
+  resource_group_name   = var.rc-name
   size                  = var.control_vm_size  # Use the variable here
   admin_username        = var.admin_username  # Use the variable here
   network_interface_ids = [azurerm_network_interface.nic-control-01.id]

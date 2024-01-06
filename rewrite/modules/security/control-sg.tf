@@ -1,9 +1,9 @@
 
 resource "azurerm_network_security_group" "control-sg-01" {
   name                = "control-sg-01"
-  location            = module.rc-group.location
-  resource_group_name = module.rc-group.name
-  tags                = module.rc-group.tags
+  location            = var.rc-location
+  resource_group_name = var.rc-name
+  tags                = var.rc-tags
 }
 
 
@@ -19,7 +19,7 @@ resource "azurerm_network_security_rule" "api_server_rule" {
   destination_port_range      = "6443"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
@@ -33,7 +33,7 @@ resource "azurerm_network_security_rule" "ETCD" {
   destination_port_range      = "2379-2380"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
@@ -47,7 +47,7 @@ resource "azurerm_network_security_rule" "kubelet_rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
@@ -61,7 +61,7 @@ resource "azurerm_network_security_rule" "kube-scheduler-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
@@ -75,7 +75,7 @@ resource "azurerm_network_security_rule" "kube-controller-manager-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
@@ -89,7 +89,7 @@ resource "azurerm_network_security_rule" "NodePort-rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
@@ -103,7 +103,7 @@ resource "azurerm_network_security_rule" "ssh_control_rule" {
   source_port_range           = "*"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = module.rc-group.name
+  resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 

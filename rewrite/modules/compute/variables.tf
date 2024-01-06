@@ -1,19 +1,19 @@
 variable "control_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
-  default     = "Standard_B2s"  # Update with your preferred default size
+  default     = "Standard_B1s"  # Update with your preferred default size
 }
 
 variable "worker_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
-  default     = "Standard_B2s"  # Update with your preferred default size
+  default     = "Standard_B1s"  # Update with your preferred default size
 }
 
 variable "jump_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
-  default     = "Standard_B2s"  # Update with your preferred default size
+  default     = "Standard_B1s"  # Update with your preferred default size
 }
 
 variable "admin_username" {
@@ -31,31 +31,23 @@ variable "admin_ssh_public_key_path" {
 variable "control_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.244.0.2"  # Update with your desired static IP
+  default     = "10.0.244.11"  # Update with your desired static IP
 }
 variable "worker1_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.244.0.3"  # Update with your desired static IP
+  default     = "10.0.244.12"  # Update with your desired static IP
 }
 variable "worker2_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.244.0.4"  # Update with your desired static IP
+  default     = "10.0.244.13"  # Update with your desired static IP
 }
 
-variable "worker_static_private_ips" {
-  type = map(string)
-  default = {
-    "1" = "10.244.0.3"  # Define your private IPs here for each worker
-    "2" = "10.244.0.4"  # Adjust with your actual IPs
-    # Add more IPs as needed
-  }
-}
 variable "jump_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.244.0.1"  # Update with your desired static IP
+  default     = "10.0.244.10"  # Update with your desired static IP
 }
 
 variable "source_image_publisher" {
@@ -81,3 +73,51 @@ variable "source_image_version" {
   type        = string
   default     = "latest"  # Update with your preferred source image version
 }
+
+
+
+
+       # input vars
+
+#rc vars
+
+variable "rc-name" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "rc-location" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "rc-tags" {
+ description = "Description of the variable"
+ type       = map(string)
+ default    = {}
+}
+
+
+
+#network vars
+
+variable "subnet_id" {
+ description = "ID of the subnet"
+ type       = string
+ default    = ""
+}
+
+variable "jump_public_ip_id" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "jump_public_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
