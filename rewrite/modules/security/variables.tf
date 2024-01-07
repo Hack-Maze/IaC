@@ -40,6 +40,12 @@ variable "control_nic_id" {
  default    = ""
 }
 
+variable "jump_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
 variable "jump_nic_id" {
  description = "Description of the variable"
  type       = string
