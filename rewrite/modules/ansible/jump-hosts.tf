@@ -19,16 +19,22 @@ resource "local_file" "jump_hosts_file" {
 }
 
 
-# resource "null_resource" "transfer_hosts_file" {
-#  provisioner "file" {
-#    source     = "/tmp/jump_hosts"
-#    destination = "/etc/hosts"
+resource "null_resource" "transfer_hosts_file" {
 
-#    connection {
-#      type       = "ssh"
-#      user       = "hackmaze-user"
-#      private_key = var.jump_private_key_content// replace with the correct path to your private key
-#      host       = var.jump_public_ip // replace with the public IP of your jump server
-#    }
-#  }
-# }
+
+ provisioner "remote-exec" {
+    inline = ["sudo rm /etc/hosts "]
+  }
+
+ provisioner "file" {
+   source     = "/tmp/jump_hosts"
+   destination = "/etc/hosts"
+
+   connection {
+     type       = "ssh"
+     user       = "hackmaze-user"
+     private_key = var.jump_private_key_content// replace with the correct path to your private key
+     host       = var.jump_public_ip // replace with the public IP of your jump server
+   }
+ }
+}
