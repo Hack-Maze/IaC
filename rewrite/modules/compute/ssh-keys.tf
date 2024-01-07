@@ -133,7 +133,11 @@ resource "local_file" "worker2_private_key" {
 
 
   provisioner "remote-exec" {
-    inline = ["chmod 600 /home/hackmaze-user/.ssh/*"]
+    inline = ["chmod 600 /home/hackmaze-user/.ssh/*.pem"]
+  }
+
+  provisioner "remote-exec" {
+    inline = ["chmod 644 /home/hackmaze-user/.ssh/*.pub"]
   }
 
   connection {
