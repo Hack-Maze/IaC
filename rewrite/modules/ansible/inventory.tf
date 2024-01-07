@@ -41,4 +41,4 @@ resource "local_file" "ansible_inventory_file" {
 #      host       = var.jump_public_ip // replace with the public IP of your jump server
 #    }
 #  }
-}
+# }
