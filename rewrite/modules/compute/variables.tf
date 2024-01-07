@@ -22,11 +22,6 @@ variable "admin_username" {
   default     = "hackmaze-user"  # Update with your preferred default username
 }
 
-variable "admin_ssh_public_key_path" {
-  description = "Path to the public SSH key file"
-  type        = string
-  default     = "~/.ssh/hackmaze-azure-key.pub"  # Update with your public key file path
-}
 
 variable "control_static_private_ip" {
   description = "Static private IP address for the NIC"
