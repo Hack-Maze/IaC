@@ -22,7 +22,7 @@ locals {
 
 
   #compute vars
-  
+  jump_static_private_ip    = module.compute.jump_static_private_ip
   control_static_private_ip = module.compute.control_static_private_ip
   worker1_static_private_ip = module.compute.worker1_static_private_ip
   worker2_static_private_ip = module.compute.worker2_static_private_ip
@@ -97,15 +97,16 @@ module "security" {
   # Pass any required variables to the compute module
   # For example:
   # variable_name = value
-  rc-name                     = local.rc-name
-  rc-location                 = local.rc-location
-  rc-tags                     = local.rc-tags
-  hackmaze_vnet_address_range = local.hackmaze_vnet_address_range
-  subnet_id                   = local.subnet_id
-  control_nic_id              = local.control_nic_id
-  jump_nic_id                 = local.jump_nic_id
-  worker1_nic_id              = local.worker1_nic_id
-  worker2_nic_id              = local.worker2_nic_id
+  rc-name                       = local.rc-name
+  rc-location                   = local.rc-location
+  rc-tags                       = local.rc-tags
+  hackmaze_vnet_address_range   = local.hackmaze_vnet_address_range
+  subnet_id                     = local.subnet_id
+  control_nic_id                = local.control_nic_id
+  jump_nic_id                   = local.jump_nic_id
+  jump_static_private_ip = local.jump_static_private_ip
+  worker1_nic_id                = local.worker1_nic_id
+  worker2_nic_id                = local.worker2_nic_id
 }
 
 
