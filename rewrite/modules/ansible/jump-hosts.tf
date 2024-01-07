@@ -26,10 +26,14 @@ resource "null_resource" "transfer_hosts_file" {
     inline = ["sudo rm /etc/hosts "]
   }
 
-  provisioner "file" {
-   source     = "/tmp/jump_hosts"
-   destination = "/etc/hosts"
+
+  provisioner "remote-exec" {
+    inline = ["scp /tmp/jump_hosts /etc/hosts "]
   }
+  # provisioner "file" {
+  #  source     = "/tmp/jump_hosts"
+  #  destination = "/etc/hosts"
+  # }
 
   connection {
     type       = "ssh"
