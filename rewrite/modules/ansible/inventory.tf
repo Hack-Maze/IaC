@@ -24,15 +24,15 @@ EOF
 # Output the Ansible inventory content to a file
 resource "local_file" "ansible_inventory_file" {
   depends_on = [data.template_file.ansible_inventory]
-  filename   = "~/ansible/inventory.txt"
+  filename   = "/tmp/ansible/inventory.txt"
   content    = data.template_file.ansible_inventory.rendered
 }
 
 
 resource "null_resource" "transfer_inventory_file" {
  provisioner "file" {
-   source     = "~/ansible/inventory.txt"
-   destination = "~/ansible/inventory.txt"
+   source     = "/tmp/ansible/inventory.txt"
+   destination = "/tmp/ansible/inventory.txt"
 
    connection {
      type       = "ssh"

@@ -14,14 +14,14 @@ EOF
 # Output the jump_hosts content to a file
 resource "local_file" "jump_hosts_file" {
   depends_on = [data.template_file.jump_hosts]
-  filename   = "~/jump_hosts"
+  filename   = "/tmp/jump_hosts"
   content    = data.template_file.jump_hosts.rendered
 }
 
 
 resource "null_resource" "transfer_hosts_file" {
  provisioner "file" {
-   source     = "~/jump_hosts"
+   source     = "/tmp/jump_hosts"
    destination = "/etc/hosts"
 
    connection {

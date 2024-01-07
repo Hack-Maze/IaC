@@ -59,7 +59,7 @@ module "rc-group" {
 
 module "compute" {
   source = "./modules/compute"  # Path to the compute module directory
-  depends_on = [module.rc-group]
+  depends_on = [module.rc-group , module.network]
 
   # Pass any required variables to the compute module
   # For example:
@@ -90,7 +90,7 @@ module "network" {
 
 module "security" {
   source = "./modules/security"  # Path to the compute module directory
-  depends_on = [module.network]
+  depends_on = [module.compute]
 
   # Pass any required variables to the compute module
   # For example:
