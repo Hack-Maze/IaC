@@ -57,6 +57,17 @@ module "rc-group" {
 }
 
 
+module "network" {
+  source = "./modules/network"  # Path to the compute module directory
+  depends_on = [module.rc-group]
+  # For example:
+  # variable_name = value
+
+  rc-name     = local.rc-name
+  rc-location = local.rc-location
+  rc-tags     = local.rc-tags
+}
+
 module "compute" {
   source = "./modules/compute"  # Path to the compute module directory
   depends_on = [module.rc-group , module.network]
@@ -77,16 +88,7 @@ module "compute" {
 
 }
 
-module "network" {
-  source = "./modules/network"  # Path to the compute module directory
-  depends_on = [module.rc-group]
-  # For example:
-  # variable_name = value
 
-  rc-name     = local.rc-name
-  rc-location = local.rc-location
-  rc-tags     = local.rc-tags
-}
 
 module "security" {
   source = "./modules/security"  # Path to the compute module directory
