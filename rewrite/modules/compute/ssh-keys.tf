@@ -116,11 +116,9 @@ resource "local_file" "worker2_private_key" {
       private_key = local_file.jump_private_key.content // replace with the correct path to your private key
       host        = var.jump_public_ip // replace with the public IP of your jump server
       timeout    = "20m"
-      
- wait_for_connection {
-   delay = "10s"
-   max_retries = "60"
- }
+
+  }
+
   }
 
 
