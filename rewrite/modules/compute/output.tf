@@ -37,7 +37,6 @@ output "worker2_nic_id" {
 
 
 output "jump_private_key_content" {
-  value = local_file.jump_private_key.content
+ value = local_file.jump_private_key.content
+ sensitive = true
 }
-
-

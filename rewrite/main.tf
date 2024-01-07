@@ -31,7 +31,7 @@ locals {
   control_nic_id            = module.compute.control_nic_id
   worker1_nic_id            = module.compute.worker1_nic_id
   worker2_nic_id            = module.compute.worker2_nic_id
-
+  jump_private_key_content  = module.compute.jump_private_key_content
   #network vars 
   subnet_id                       = module.network.subnet_id
   jump_public_ip                  = module.network.jump_public_ip
@@ -126,6 +126,7 @@ module "ansible" {
   worker1_static_private_ip = local.worker1_static_private_ip
   worker2_static_private_ip = local.worker2_static_private_ip
   admin_username            = local.admin_username
+  jump_private_key_content  = local.jump_private_key_content
 
 }
 
