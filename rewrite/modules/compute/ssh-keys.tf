@@ -107,14 +107,14 @@ resource "local_file" "worker2_private_key" {
       command = "scp -i  /tmp/.ssh/jump_private_key.pem /tmp/.ssh/worker2_private_key.pem ec2-user@${var.worker2_static_private_ip}:/home/hackmaze-user/.ssh/"
     }
 
-  #   connection {
-  #     type        = "ssh"
-  #     user        = "hackmaze-user"
-  #     private_key = local_file.jump_private_key.content // replace with the correct path to your private key
-  #     host        = var.jump_public_ip // replace with the public IP of your jump server
-  #     timeout    = "20m"
+    connection {
+      type        = "ssh"
+      user        = "hackmaze-user"
+      private_key = local_file.jump_private_key.content // replace with the correct path to your private key
+      host        = var.jump_public_ip // replace with the public IP of your jump server
+      timeout    = "20m"
 
-  # }
+  }
 
   }
 
