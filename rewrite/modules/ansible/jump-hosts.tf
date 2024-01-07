@@ -26,15 +26,16 @@ resource "null_resource" "transfer_hosts_file" {
     inline = ["sudo rm /etc/hosts "]
   }
 
- provisioner "file" {
+  provisioner "file" {
    source     = "/tmp/jump_hosts"
    destination = "/etc/hosts"
+  }
 
-   connection {
-     type       = "ssh"
-     user       = "hackmaze-user"
-     private_key = var.jump_private_key_content// replace with the correct path to your private key
-     host       = var.jump_public_ip // replace with the public IP of your jump server
-   }
- }
+  connection {
+    type       = "ssh"
+    user       = "hackmaze-user"
+    private_key = var.jump_private_key_content // replace with the correct path to your private key
+    host       = var.jump_public_ip // replace with the public IP of your jump server
+  }
+
 }
