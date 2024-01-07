@@ -25,6 +25,9 @@ output "jump_public_ip" {
 
 
 
+
+
+
 output "hackmaze_vnet_address_range" {
   value = var.hackmaze_vnet_address_range
 }
