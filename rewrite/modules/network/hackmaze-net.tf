@@ -16,10 +16,3 @@ resource "azurerm_subnet" "hackmaze-subnet-01" {
 }
 
 
-resource "azurerm_public_ip" "jump_server_ip" {
- name                = "jump-server-ip"
- location            = var.rc-location
- resource_group_name = var.rc-name
- allocation_method   = "Dynamic"
- tags                = var.rc-tags
-}

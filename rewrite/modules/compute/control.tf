@@ -1,18 +1,5 @@
 
 
-# resource "azurerm_public_ip" "hackmaze-ip-control-01" {
-#   name                = "hackmaze-ip-control-01"
-#   resource_group_name = azurerm_resource_group.hackmaze-group.name
-#   location            = azurerm_resource_group.hackmaze-group.location
-#   allocation_method   = "Dynamic"
-
-#   tags = azurerm_resource_group.hackmaze-group.tags
-# }
-
-
-
-
-
 resource "azurerm_network_interface" "nic-control-01" {
   name                = "nic-control-01"
   location            = var.rc-location

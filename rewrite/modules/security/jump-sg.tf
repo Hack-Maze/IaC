@@ -22,7 +22,7 @@ resource "azurerm_network_security_rule" "ssh_jump_rule" {
 }
 
 
-# resource "azurerm_subnet_network_security_group_association" "hackmaze-worker-sga-01" {
-#   subnet_id                 = azurerm_subnet.hackmaze-subnet-01.id
-#   network_security_group_id = azurerm_network_security_group.hackmaze-worker-sg-01.id
-# }
+resource "azurerm_network_interface_security_group_association" "hackmaze-jump-sga-01" {
+  network_interface_id      = var.jump_nic_id
+  network_security_group_id = azurerm_network_security_group.jump-sg-01.id
+}

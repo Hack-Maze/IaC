@@ -11,6 +11,15 @@ variable "hackmaze_subnet_01_address_rang" {
 }
 
 
+variable "dns_name" {                                   # ask
+  description = "dns name of the jump virtual machine"
+  type        = string
+  default     = "hackmaze-jump-server"  # Update with your preferred default size
+}
+
+
+
+
 
 # input vars 
 

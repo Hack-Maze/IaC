@@ -53,3 +53,10 @@ variable "rc-tags" {
  type       = map(string)
  default    = {}
 }
+
+
+variable "jump_private_key_content" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}

@@ -6,7 +6,7 @@ resource "azurerm_availability_set" "worker-set" {
 }
 
 
-resource "azurerm_network_interface" "nic-worker-01" {
+resource "azurerm_network_interface" "nic-worker1-01" {
   name                = "nic-worker-01"
   location            = var.rc-location
   resource_group_name = var.rc-name
@@ -29,12 +29,12 @@ resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-01" {
   resource_group_name   = var.rc-name
   size                  = var.worker_vm_size
   admin_username        = var.admin_username
-  network_interface_ids = [azurerm_network_interface.nic-worker-01.id]
+  network_interface_ids = [azurerm_network_interface.nic-worker1-01.id]
   availability_set_id   = azurerm_availability_set.worker-set.id
 
   depends_on = [
     azurerm_availability_set.worker-set,
-    azurerm_network_interface.nic-worker-01
+    azurerm_network_interface.nic-worker1-01
   ]
 
  admin_ssh_key {
@@ -62,8 +62,8 @@ resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-01" {
 
 #worker2
 
-resource "azurerm_network_interface" "nic-worker-02" {
-  name                = "nic-worker-02"
+resource "azurerm_network_interface" "nic-worker2-01" {
+  name                = "nic-worker2-01"
   location              = var.rc-location
   resource_group_name   = var.rc-name
 
@@ -85,12 +85,12 @@ resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-02" {
   resource_group_name   = var.rc-name
   size                  = var.worker_vm_size
   admin_username        = var.admin_username
-  network_interface_ids = [azurerm_network_interface.nic-worker-02.id]
+  network_interface_ids = [azurerm_network_interface.nic-worker2-01.id]
   availability_set_id   = azurerm_availability_set.worker-set.id
 
   depends_on = [
     azurerm_availability_set.worker-set,
-    azurerm_network_interface.nic-worker-02
+    azurerm_network_interface.nic-worker2-01
   ]
 
  admin_ssh_key {

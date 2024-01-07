@@ -5,8 +5,8 @@
 # Jump Server
 
 
-resource "azurerm_network_interface" "jump_server_nic" {
- name                = "jump-server-nic"
+resource "azurerm_network_interface" "jump_server_nic-01" {
+ name                = "jump-server-nic-01"
  location            = var.rc-location
  resource_group_name = var.rc-name
 
@@ -16,8 +16,11 @@ resource "azurerm_network_interface" "jump_server_nic" {
     private_ip_address_allocation = "Static"
     private_ip_address            = var.jump_static_private_ip  # Use the variable here
     public_ip_address_id          = var.jump_public_ip_id
+      
+
 
 }
+ 
  tags = var.rc-tags
 }
 
@@ -27,7 +30,7 @@ resource "azurerm_linux_virtual_machine" "jump_server" {
  resource_group_name   = var.rc-name
  size                  = var.jump_vm_size
  admin_username        = var.admin_username
- network_interface_ids = [azurerm_network_interface.jump_server_nic.id]
+ network_interface_ids = [azurerm_network_interface.jump_server_nic-01.id]
 
  admin_ssh_key {
     username   = var.admin_username
@@ -46,3 +49,6 @@ resource "azurerm_linux_virtual_machine" "jump_server" {
     version   = var.source_image_version  # Use the variable here
   }
 }
+
+
+

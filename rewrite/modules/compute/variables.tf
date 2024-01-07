@@ -121,3 +121,21 @@ variable "jump_public_ip" {
  default    = ""
 }
 
+variable "jump_sg_id" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+
+variable "control_sg_id" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "worker_sg_id" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
