@@ -33,14 +33,15 @@ provisioner "file" {
 }
 
 provisioner "remote-exec" {
- inline = [
-   "sudo mv /tmp/jump_hosts /etc/hosts"
- ]
-  connection {
-    type       = "ssh"
-    user       = "hackmaze-user"
-    private_key = var.jump_private_key_content // replace with the correct path to your private key
-    host       = var.jump_public_ip // replace with the public IP of your jump server
-  }
+ inline = ["sudo mv /tmp/jump_hosts /etc/hosts"]
+ }
+ 
+connection {
+  type       = "ssh"
+  user       = "hackmaze-user"
+  private_key = var.jump_private_key_content // replace with the correct path to your private key
+  host       = var.jump_public_ip // replace with the public IP of your jump server
+}
+
 
 }
