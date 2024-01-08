@@ -30,45 +30,45 @@ resource "local_file" "ansible_inventory_file" {
 }
 
 
-resource "null_resource" "transfer_ansible" {
+# resource "null_resource" "transfer_ansible" {
 
- provisioner "remote-exec" {
-   inline = ["mkdir -p /tmp/ansible/"]
-  }
+#  provisioner "remote-exec" {
+#    inline = ["mkdir -p /tmp/ansible/"]
+#   }
 
-  provisioner "remote-exec" {
-   inline = [
-     "sudo apt-get update",
-     "sudo apt-get install -y software-properties-common",
-     "sudo apt-add-repository --yes --update ppa:ansible/ansible",
-     "sudo apt-get install -y ansible"
-   ]
-  }
+#   provisioner "remote-exec" {
+#    inline = [
+#      "sudo apt-get update",
+#      "sudo apt-get install -y software-properties-common",
+#      "sudo apt-add-repository --yes --update ppa:ansible/ansible",
+#      "sudo apt-get install -y ansible"
+#    ]
+#   }
 
-  provisioner "file" {
-   source      = "~/IaC/rewrite/ansible/kube-dependencies.yml"
-   destination = "/tmp/ansible/kube-dependencies.yml"
-  }
+#   provisioner "file" {
+#    source      = "~/IaC/rewrite/ansible/kube-dependencies.yml"
+#    destination = "/tmp/ansible/kube-dependencies.yml"
+#   }
 
-  provisioner "file" {
-   source      = "~/IaC/rewrite/ansible/master.yml"
-   destination = "/tmp/ansible/master.yml"
-  }
-  provisioner "file" {
-   source      = "~/IaC/rewrite/ansible/workers.yml"
-   destination = "/tmp/ansible/workers.yml"
-  }
+#   provisioner "file" {
+#    source      = "~/IaC/rewrite/ansible/master.yml"
+#    destination = "/tmp/ansible/master.yml"
+#   }
+#   provisioner "file" {
+#    source      = "~/IaC/rewrite/ansible/workers.yml"
+#    destination = "/tmp/ansible/workers.yml"
+#   }
 
-  provisioner "file" {
-   source      = "/tmp/ansible/inventory.txt"
-   destination = "/tmp/ansible/inventory.txt"
-  }
+#   provisioner "file" {
+#    source      = "/tmp/ansible/inventory.txt"
+#    destination = "/tmp/ansible/inventory.txt"
+#   }
 
-  connection {
-  type       = "ssh"
-  user       = "hackmaze-user"
-  private_key = var.jump_private_key_content // replace with the correct path to your private key
-  host       = var.jump_public_ip // replace with the public IP of your jump server
- }
+#   connection {
+#   type       = "ssh"
+#   user       = "hackmaze-user"
+#   private_key = var.jump_private_key_content // replace with the correct path to your private key
+#   host       = var.jump_public_ip // replace with the public IP of your jump server
+#  }
 
-}
+# }
