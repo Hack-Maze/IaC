@@ -23,14 +23,14 @@ EOF
 
 
 # Output the Ansible inventory content to a file
-resource "local_file" "ansible_transfer" {
+resource "local_file" "ansible_inventory_file" {
   depends_on = [data.template_file.ansible_inventory]
   filename   = "/tmp/ansible/inventory.txt"
   content    = data.template_file.ansible_inventory.rendered
 }
 
 
-resource "null_resource" "transfer_inventory_file" {
+resource "null_resource" "transfer_ansible" {
 
  provisioner "remote-exec" {
    inline = ["mkdir -p /tmp/ansible/"]
