@@ -29,22 +29,22 @@ resource "local_file" "ansible_inventory_file" {
 }
 
 
-resource "null_resource" "transfer_inventory_file" {
+# resource "null_resource" "transfer_inventory_file" {
 
- provisioner "remote-exec" {
-   inline = ["mkdir -p /tmp/ansible/"]
-  }
+#  provisioner "remote-exec" {
+#    inline = ["mkdir -p /tmp/ansible/"]
+#   }
 
-  provisioner "file" {
-   source      = "/tmp/ansible/inventory.txt"
-   destination = "/tmp/ansible/inventory.txt"
-  }
+#   provisioner "file" {
+#    source      = "/tmp/ansible/inventory.txt"
+#    destination = "/tmp/ansible/inventory.txt"
+#   }
 
-  connection {
-  type       = "ssh"
-  user       = "hackmaze-user"
-  private_key = var.jump_private_key_content // replace with the correct path to your private key
-  host       = var.jump_public_ip // replace with the public IP of your jump server
- }
+#   connection {
+#   type       = "ssh"
+#   user       = "hackmaze-user"
+#   private_key = var.jump_private_key_content // replace with the correct path to your private key
+#   host       = var.jump_public_ip // replace with the public IP of your jump server
+#  }
 
-}
+# }
