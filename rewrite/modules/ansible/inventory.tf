@@ -31,11 +31,14 @@ resource "local_file" "ansible_inventory_file" {
 
 resource "null_resource" "transfer_inventory_file" {
 
+ provisioner "remote-exec" {
+   inline = ["mkdir -p /tmp/ansible/"]
+  }
 
   provisioner "file" {
    source      = "/tmp/ansible/inventory.txt"
    destination = "/tmp/ansible/inventory.txt"
- }
+  }
 
   connection {
   type       = "ssh"
