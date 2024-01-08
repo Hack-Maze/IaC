@@ -27,14 +27,15 @@ resource "null_resource" "transfer_hosts_file" {
   }
 
 
-  provisioner "remote-exec" {
-    inline = ["scp /tmp/jump_hosts /etc/hosts "]
-  }
-  # provisioner "file" {
-  #  source     = "/tmp/jump_hosts"
-  #  destination = "/etc/hosts"
-  # }
+provisioner "file" {
+ source     = "/tmp/jump_hosts"
+ destination = "/tmp/jump_hosts"
+}
 
+provisioner "remote-exec" {
+ inline = [
+   "sudo mv /tmp/jump_hosts /etc/hosts"
+ ]
   connection {
     type       = "ssh"
     user       = "hackmaze-user"
