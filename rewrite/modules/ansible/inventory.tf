@@ -23,7 +23,7 @@ EOF
 
 
 # Output the Ansible inventory content to a file
-resource "local_file" "ansible_inventory_file" {
+resource "local_file" "ansible_transfer" {
   depends_on = [data.template_file.ansible_inventory]
   filename   = "/tmp/ansible/inventory.txt"
   content    = data.template_file.ansible_inventory.rendered
