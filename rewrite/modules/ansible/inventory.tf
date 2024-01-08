@@ -1,15 +1,17 @@
 
 data "template_file" "ansible_inventory" {
   template = <<EOF
-[jump]
-jump   ansible_host=${var.jump_public_ip} ansible_ssh_private_key_file="~/.ssh/jump_private_key.pem"
-
-[master]
+[all]
 master ansible_host=${var.control_static_private_ip} ansible_ssh_private_key_file="~/.ssh/control_private_key.pem"
-
-[workers]
 worker1 ansible_host=${var.worker1_static_private_ip} ansible_ssh_private_key_file="~/.ssh/worker1_private_key.pem"
 worker2 ansible_host=${var.worker2_static_private_ip} ansible_ssh_private_key_file="~/.ssh/worker2_private_key.pem"
+
+
+[master]
+master
+[workers]
+worker1 
+worker2 
 
 
 [all:vars]
@@ -18,7 +20,6 @@ ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/n
 ansible_user=${var.admin_username}
 EOF
 }
-
 
 
 # Output the Ansible inventory content to a file
@@ -33,6 +34,29 @@ resource "null_resource" "transfer_inventory_file" {
 
  provisioner "remote-exec" {
    inline = ["mkdir -p /tmp/ansible/"]
+  }
+
+  provisioner "remote-exec" {
+   inline = [
+     "sudo apt-get update",
+     "sudo apt-get install -y software-properties-common",
+     "sudo apt-add-repository --yes --update ppa:ansible/ansible",
+     "sudo apt-get install -y ansible"
+   ]
+  }
+
+  provisioner "file" {
+   source      = "~/IaC/rewrite/ansible/kube-dependencies.yml"
+   destination = "/tmp/ansible/kube-dependencies.yml"
+  }
+
+  provisioner "file" {
+   source      = "~/IaC/rewrite/ansible/master.yml"
+   destination = "/tmp/ansible/master.yml"
+  }
+  provisioner "file" {
+   source      = "~/IaC/rewrite/ansible/workers.yml"
+   destination = "/tmp/ansible/workers.yml"
   }
 
   provisioner "file" {
