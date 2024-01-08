@@ -108,7 +108,7 @@ resource "azurerm_network_security_rule" "ssh_control_rule" {
 }
 
 resource "azurerm_network_security_rule" "Allow_Api_8080" {
-  name                        = "AllowSSH8080"
+  name                        = "AllowAPI8080"
   priority                    = 107
   direction                   = "Inbound"
   access                      = "Allow"
