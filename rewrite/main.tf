@@ -104,7 +104,7 @@ module "security" {
   subnet_id                     = local.subnet_id
   control_nic_id                = local.control_nic_id
   jump_nic_id                   = local.jump_nic_id
-  jump_static_private_ip = local.jump_static_private_ip
+  jump_static_private_ip        = local.jump_static_private_ip
   worker1_nic_id                = local.worker1_nic_id
   worker2_nic_id                = local.worker2_nic_id
 }
