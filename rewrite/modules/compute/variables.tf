@@ -1,7 +1,7 @@
 variable "control_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
-  default     = "Standard_B1s"  # Update with your preferred default size
+  default     = "Standard_B2s"  # Update with your preferred default size
 }
 
 variable "worker_vm_size" {
