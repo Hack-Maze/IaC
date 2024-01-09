@@ -79,7 +79,7 @@ module "compute" {
   rc-location       = local.rc-location
   rc-tags           = local.rc-tags
   subnet_id         = local.subnet_id
-  jump_public_ip    = module.network.jump_public_ip
+  jump_public_ip    = local.jump_public_ip
   jump_public_ip_id = local.jump_public_ip_id
 
   jump_sg_id        = local.jump_sg_id
