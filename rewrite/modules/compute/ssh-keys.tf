@@ -103,17 +103,17 @@ resource "local_file" "worker2_private_key" {
   }
 
 
-  resource "time_sleep" "wait_30_seconds_for_jump_ok" {
+  resource "time_sleep" "wait_60_seconds_for_jump_ok" {
   depends_on = [null_resource.jump_ok]
 
-  create_duration = "30s"
+  create_duration = "60s"
 }
 
 
 
 resource "null_resource" "transfer_pem" {
 
-  depends_on = [time_sleep.wait_30_seconds_for_jump_ok]
+  depends_on = [time_sleep.wait_60_seconds_for_jump_ok]
 
   provisioner "file" {
     source      = "/tmp/.ssh/control_public_key.pub"
