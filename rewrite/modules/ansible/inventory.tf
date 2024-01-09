@@ -60,7 +60,6 @@ resource "null_resource" "transfer_ansible" {
   }
 
   provisioner "file" {
-   source      = "/tmp/ansible/inventory.txt"
    destination = "/tmp/ansible/inventory.txt"
   }
 
