@@ -52,7 +52,7 @@ resource "null_resource" "transfer_ansible" {
 
   provisioner "file" {
    source      = "/tmp/ansible/inventory.txt"
-   destination = "/home/hackmaze-user/ansible/playbooks/inventory.txt"
+   destination = "/home/hackmaze-user/ansible/inventory.txt"
   }
 
   connection {
