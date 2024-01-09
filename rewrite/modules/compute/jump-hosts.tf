@@ -27,21 +27,21 @@ resource "null_resource" "transfer_hosts_file" {
   }
 
 
-provisioner "file" {
- source     = "/tmp/jump_hosts"
- destination = "/tmp/jump_hosts"
-}
+  provisioner "file" {
+  source     = "/tmp/jump_hosts"
+  destination = "/tmp/jump_hosts"
+  }
 
-provisioner "remote-exec" {
- inline = ["sudo mv /tmp/jump_hosts /etc/hosts"]
- }
- 
-connection {
-  type       = "ssh"
-  user       = "hackmaze-user"
-  private_key = var.jump_private_key_content // replace with the correct path to your private key
-  host       = var.jump_public_ip // replace with the public IP of your jump server
-}
+  provisioner "remote-exec" {
+  inline = ["sudo mv /tmp/jump_hosts /etc/hosts"]
+  }
+  
+  connection {
+    type       = "ssh"
+    user       = "hackmaze-user"
+    private_key = var.jump_private_key_content // replace with the correct path to your private key
+    host       = var.jump_public_ip // replace with the public IP of your jump server
+  }
 
 
 }
