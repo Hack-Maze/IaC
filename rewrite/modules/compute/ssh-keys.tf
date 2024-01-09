@@ -96,10 +96,6 @@ resource "local_file" "worker2_private_key" {
                 local_file.worker1_private_key,
                 local_file.worker2_private_key]
 
-
-
-
-
   }
 
 
