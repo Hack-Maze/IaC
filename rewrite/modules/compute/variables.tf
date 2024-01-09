@@ -25,27 +25,28 @@ variable "admin_username" {
 }
 
 
+variable "jump_static_private_ip" {
+  description = "Static private IP address for the NIC"
+  type        = string
+  default     = "10.0.0.11"  # Update with your desired static IP
+}
+
 variable "control_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.0.244.11"  # Update with your desired static IP
+  default     = "10.0.0.12"  # Update with your desired static IP
 }
 variable "worker1_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.0.244.12"  # Update with your desired static IP
+  default     = "10.0.0.13"  # Update with your desired static IP
 }
 variable "worker2_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.0.244.13"  # Update with your desired static IP
+  default     = "10.0.0.14"  # Update with your desired static IP
 }
 
-variable "jump_static_private_ip" {
-  description = "Static private IP address for the NIC"
-  type        = string
-  default     = "10.0.244.10"  # Update with your desired static IP
-}
 
 variable "source_image_publisher" {
   description = "Publisher for the source image"
