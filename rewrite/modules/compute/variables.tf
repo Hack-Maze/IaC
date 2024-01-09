@@ -2,7 +2,7 @@
 variable "control_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
-  default     = "Standard_A2_v2"  # Update with your preferred default size  
+  default     = "Standard_D2s_v3"  # Update with your preferred default size  
 }
 
 # 1 core 1 mem

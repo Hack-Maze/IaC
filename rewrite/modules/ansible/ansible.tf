@@ -33,26 +33,26 @@ resource "local_file" "ansible_inventory_file" {
 resource "null_resource" "transfer_ansible" {
 
  provisioner "remote-exec" {
-   inline = ["mkdir -p ~/ansible/"]
+   inline = ["mkdir -p ~/ansible/playbooks"]
   }
 
   provisioner "file" {
    source      = "~/IaC/rewrite/ansible/kube-dependencies.yml"
-   destination = "~/ansible/kube-dependencies.yml"
+   destination = "/home/hackmaze-user/ansible/playbooks/kube-dependencies.yml"
   }
 
   provisioner "file" {
    source      = "~/IaC/rewrite/ansible/master.yml"
-   destination = "~/ansible/master.yml"
+   destination = "/home/hackmaze-user/ansible/playbooks/master.yml"
   }
   provisioner "file" {
    source      = "~/IaC/rewrite/ansible/workers.yml"
-   destination = "~/ansible/workers.yml"
+   destination = "/home/hackmaze-user/ansible/playbooks/workers.yml"
   }
 
   provisioner "file" {
    source      = "/tmp/ansible/inventory.txt"
-   destination = "~/ansible/inventory.txt"
+   destination = "/home/hackmaze-user/ansible/playbooks/inventory.txt"
   }
 
   connection {
