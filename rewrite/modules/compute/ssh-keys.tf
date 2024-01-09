@@ -103,7 +103,7 @@ resource "local_file" "worker2_private_key" {
   }
 
 
-  resource "time_sleep" "wait_30_seconds_for jump_ok" {
+  resource "time_sleep" "wait_30_seconds_for_jump_ok" {
   depends_on = [null_resource.jump_ok]
 
   create_duration = "30s"
