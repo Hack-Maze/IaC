@@ -70,7 +70,7 @@ module "network" {
 
 module "compute" {
   source = "./modules/compute"  # Path to the compute module directory
-  depends_on = [ module.network]
+  depends_on = [ module.rc-group]
 
   # Pass any required variables to the compute module
   # For example:
@@ -79,7 +79,7 @@ module "compute" {
   rc-location       = local.rc-location
   rc-tags           = local.rc-tags
   subnet_id         = local.subnet_id
-  jump_public_ip    = local.jump_public_ip
+  jump_public_ip    = module.network.jump_public_ip
   jump_public_ip_id = local.jump_public_ip_id
 
   jump_sg_id        = local.jump_sg_id
@@ -112,7 +112,7 @@ module "security" {
 
 module "ansible" {
   source = "./modules/ansible"  # Path to the compute module directory
-  depends_on = [module.compute]
+  depends_on = [module.security]
   # Pass any required variables to the compute module
   # For example:
   # variable_name = value
