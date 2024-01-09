@@ -113,7 +113,7 @@ variable "jump_public_ip_id" {
 variable "jump_public_ip" {
  description = "Description of the variable"
  type       = string
- default    = "hackmaze-jump-server.eastus.cloudapp.azure.com"
+ default    = ""
 }
 
 variable "jump_sg_id" {

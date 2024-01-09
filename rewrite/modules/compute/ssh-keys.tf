@@ -88,7 +88,7 @@ resource "local_file" "worker2_private_key" {
 
 
 
-  resource "null_resource" "transfer_pem" {
+  resource "null_resource" "jump_ok" {
   depends_on = [azurerm_network_interface.jump_server_nic-01,
                 azurerm_linux_virtual_machine.jump_server,
                 local_file.jump_private_key,
@@ -96,6 +96,24 @@ resource "local_file" "worker2_private_key" {
                 local_file.worker1_private_key,
                 local_file.worker2_private_key]
 
+
+
+
+
+  }
+
+
+  resource "time_sleep" "wait_30_seconds_for jump_ok" {
+  depends_on = [null_resource.jump_ok]
+
+  create_duration = "30s"
+}
+
+
+
+resource "null_resource" "transfer_pem" {
+
+  depends_on = [time_sleep.wait_30_seconds]
 
   provisioner "file" {
     source      = "/tmp/.ssh/control_public_key.pub"
