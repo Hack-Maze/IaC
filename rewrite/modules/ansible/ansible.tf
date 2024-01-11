@@ -84,6 +84,7 @@ resource "null_resource" "install_ansible" {
     user       = "hackmaze-user"
     private_key = var.jump_private_key_content // replace with the correct path to your private key
     host       = var.jump_public_ip // replace with the public IP of your jump server
+    timeout    = "3m"
   }
 
 }
