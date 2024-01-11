@@ -88,10 +88,14 @@ resource "local_file" "worker2_private_key" {
 
 
   resource "null_resource" "transfer_pem" {
-  depends_on = [azurerm_linux_virtual_machine.jump_server,
-                azurerm_network_interface.jump_server_nic-01,
-                local_file.jump_public_key
-               ]
+  depends_on = [azurerm_network_interface.jump_server_nic-01,
+                azurerm_linux_virtual_machine.jump_server,
+                local_file.jump_private_key,
+                local_file.control_private_key,
+                local_file.worker1_private_key,
+                local_file.worker2_private_key]
+
+
 
 
   provisioner "file" {
@@ -116,14 +120,15 @@ resource "local_file" "worker2_private_key" {
     inline = ["chmod 600 /home/hackmaze-user/.ssh/*.pem"]
   }
 
-    connection {
-      type        = "ssh"
-      user        = "hackmaze-user"
-      private_key = file(local_file.jump_public_key.filename)// replace with the correct path to your private key
-      host        = var.jump_public_ip // replace with the public IP of your jump server
-      timeout    = "1m"
-    }
+  connection {
+    type        = "ssh"
+    user        = "hackmaze-user"
+    private_key = local_file.jump_private_key.content // replace with the correct path to your private key
+    host        = var.jump_public_ip // replace with the public IP of your jump server
+    timeout    = "20m"
 
-}
+  }
+
+  }
 
 
