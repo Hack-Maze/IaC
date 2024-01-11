@@ -88,14 +88,9 @@ resource "local_file" "worker2_private_key" {
 
 
   resource "null_resource" "transfer_pem" {
-  depends_on = [azurerm_network_interface.jump_server_nic-01,
-                azurerm_linux_virtual_machine.jump_server,
-                local_file.jump_private_key,
-                local_file.control_private_key,
-                local_file.worker1_private_key,
-                local_file.worker2_private_key]
-
-
+  depends_on = [azurerm_linux_virtual_machine.jump_server,
+                azurerm_network_interface.jump_server_nic-01,
+               ]
 
 
   provisioner "file" {
