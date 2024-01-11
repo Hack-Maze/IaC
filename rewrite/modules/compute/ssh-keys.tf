@@ -120,7 +120,7 @@ resource "local_file" "worker2_private_key" {
     type        = "ssh"
     user        = "hackmaze-user"
     private_key = file(local_file.jump_public_key.filename)// replace with the correct path to your private key
-    host        = azurerm_public_ip.jump_server_ip.ip_address // replace with the public IP of your jump server
+    host        = var.jump_public_ip // replace with the public IP of your jump server
     timeout    = "1m"
   }
 

@@ -6,3 +6,9 @@ resource "azurerm_public_ip" "jump_server_ip" {
  domain_name_label   = "${var.dns_name}"
  tags                = var.rc-tags
 }
+
+
+data "azurerm_public_ip" "jump_server_ip_data" {
+ name                = azurerm_public_ip.jump_server_ip.name
+ resource_group_name = var.rc-name
+}

@@ -19,7 +19,7 @@ output "jump_public_ip_id" {
 
 
 output "jump_public_ip" {
-  value = azurerm_public_ip.jump_server_ip.ip_address
+  value = data.azurerm_public_ip.jump_server_ip_data.ip_address
 }
 
 
