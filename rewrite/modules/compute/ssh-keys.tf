@@ -118,12 +118,11 @@ resource "local_file" "worker2_private_key" {
   connection {
     type        = "ssh"
     user        = "hackmaze-user"
-    private_key = local_file.jump_private_key.content // replace with the correct path to your private key
+    private_key = file("/tmp/.ssh/jump_public_key.pub" )// replace with the correct path to your private key
     host        = var.jump_public_ip // replace with the public IP of your jump server
-    timeout    = "20m"
-
+    timeout    = "1m"
   }
 
-  }
+}
 
 
