@@ -116,13 +116,13 @@ resource "local_file" "worker2_private_key" {
     inline = ["chmod 600 /home/hackmaze-user/.ssh/*.pem"]
   }
 
-  connection {
-    type        = "ssh"
-    user        = "hackmaze-user"
-    private_key = file(local_file.jump_public_key.filename)// replace with the correct path to your private key
-    host        = var.jump_public_ip // replace with the public IP of your jump server
-    timeout    = "1m"
-  }
+    connection {
+      type        = "ssh"
+      user        = "hackmaze-user"
+      private_key = file(local_file.jump_public_key.filename)// replace with the correct path to your private key
+      host        = var.jump_public_ip // replace with the public IP of your jump server
+      timeout    = "1m"
+    }
 
 }
 
