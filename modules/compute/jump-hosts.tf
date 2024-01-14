@@ -36,6 +36,16 @@ provisioner "remote-exec" {
  inline = ["sudo mv /tmp/jump_hosts /etc/hosts"]
  }
  
+
+provisioner "remote-exec" {
+ inline = ["echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc";
+           "echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc";
+           "echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc";
+           "source $HOME/.bashrc";
+           ]
+ }
+ 
+
 connection {
   type       = "ssh"
   user       = "hackmaze-user"

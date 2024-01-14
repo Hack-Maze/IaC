@@ -1,7 +1,7 @@
 variable "name" {
   description = "The name of the Azure resource group"
   type        = string
-  default     = "hackmaze-rc"
+  default     = "HM-rc"
 }
 
 variable "location" {
@@ -16,6 +16,6 @@ variable "tags" {
   default     = {
     environment = "testing"
     owner       = "1337"
-    project     = "Hackmaze"
+    project     = "HM"
     }
 }
