@@ -22,7 +22,7 @@ locals {
 
 
   #compute vars
-  
+  jump_static_private_ip    = module.compute.jump_static_private_ip
   control_static_private_ip = module.compute.control_static_private_ip
   worker1_static_private_ip = module.compute.worker1_static_private_ip
   worker2_static_private_ip = module.compute.worker2_static_private_ip
@@ -31,7 +31,7 @@ locals {
   control_nic_id            = module.compute.control_nic_id
   worker1_nic_id            = module.compute.worker1_nic_id
   worker2_nic_id            = module.compute.worker2_nic_id
-
+  jump_private_key_content  = module.compute.jump_private_key_content
   #network vars 
   subnet_id                       = module.network.subnet_id
   jump_public_ip                  = module.network.jump_public_ip
@@ -57,9 +57,20 @@ module "rc-group" {
 }
 
 
+module "network" {
+  source = "./modules/network"  # Path to the compute module directory
+  depends_on = [module.rc-group]
+  # For example:
+  # variable_name = value
+
+  rc-name     = local.rc-name
+  rc-location = local.rc-location
+  rc-tags     = local.rc-tags
+}
+
 module "compute" {
   source = "./modules/compute"  # Path to the compute module directory
-  depends_on = [module.rc-group]
+  depends_on = [ module.rc-group]
 
   # Pass any required variables to the compute module
   # For example:
@@ -77,33 +88,25 @@ module "compute" {
 
 }
 
-module "network" {
-  source = "./modules/network"  # Path to the compute module directory
-  depends_on = [module.rc-group]
-  # For example:
-  # variable_name = value
 
-  rc-name     = local.rc-name
-  rc-location = local.rc-location
-  rc-tags     = local.rc-tags
-}
 
 module "security" {
   source = "./modules/security"  # Path to the compute module directory
-  depends_on = [module.network]
+  depends_on = [module.rc-group]
 
   # Pass any required variables to the compute module
   # For example:
   # variable_name = value
-  rc-name                     = local.rc-name
-  rc-location                 = local.rc-location
-  rc-tags                     = local.rc-tags
-  hackmaze_vnet_address_range = local.hackmaze_vnet_address_range
-  subnet_id                   = local.subnet_id
-  control_nic_id              = local.control_nic_id
-  jump_nic_id                 = local.jump_nic_id
-  worker1_nic_id              = local.worker1_nic_id
-  worker2_nic_id              = local.worker2_nic_id
+  rc-name                       = local.rc-name
+  rc-location                   = local.rc-location
+  rc-tags                       = local.rc-tags
+  hackmaze_vnet_address_range   = local.hackmaze_vnet_address_range
+  subnet_id                     = local.subnet_id
+  control_nic_id                = local.control_nic_id
+  jump_nic_id                   = local.jump_nic_id
+  jump_static_private_ip        = local.jump_static_private_ip
+  worker1_nic_id                = local.worker1_nic_id
+  worker2_nic_id                = local.worker2_nic_id
 }
 
 
@@ -123,6 +126,7 @@ module "ansible" {
   worker1_static_private_ip = local.worker1_static_private_ip
   worker2_static_private_ip = local.worker2_static_private_ip
   admin_username            = local.admin_username
+  jump_private_key_content  = local.jump_private_key_content
 
 }
 

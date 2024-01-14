@@ -1,15 +1,17 @@
+# 2core 4 mem
 variable "control_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
-  default     = "Standard_B1s"  # Update with your preferred default size
+  default     = "Standard_D2s_v3"  # Update with your preferred default size  
 }
 
+# 1 core 1 mem
 variable "worker_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
   default     = "Standard_B1s"  # Update with your preferred default size
 }
-
+# 1 core 1 mem
 variable "jump_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
@@ -22,33 +24,29 @@ variable "admin_username" {
   default     = "hackmaze-user"  # Update with your preferred default username
 }
 
-variable "admin_ssh_public_key_path" {
-  description = "Path to the public SSH key file"
+
+variable "jump_static_private_ip" {
+  description = "Static private IP address for the NIC"
   type        = string
-  default     = "~/.ssh/hackmaze-azure-key.pub"  # Update with your public key file path
+  default     = "10.0.0.11"  # Update with your desired static IP
 }
 
 variable "control_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.0.244.11"  # Update with your desired static IP
+  default     = "10.0.0.12"  # Update with your desired static IP
 }
 variable "worker1_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.0.244.12"  # Update with your desired static IP
+  default     = "10.0.0.13"  # Update with your desired static IP
 }
 variable "worker2_static_private_ip" {
   description = "Static private IP address for the NIC"
   type        = string
-  default     = "10.0.244.13"  # Update with your desired static IP
+  default     = "10.0.0.14"  # Update with your desired static IP
 }
 
-variable "jump_static_private_ip" {
-  description = "Static private IP address for the NIC"
-  type        = string
-  default     = "10.0.244.10"  # Update with your desired static IP
-}
 
 variable "source_image_publisher" {
   description = "Publisher for the source image"

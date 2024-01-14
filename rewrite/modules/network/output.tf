@@ -15,20 +15,11 @@ output "jump_public_ip_id" {
   value = azurerm_public_ip.jump_server_ip.id
 }
 
-# output "jump_public_ip" {
-#   value = azurerm_public_ip.jump_server_ip.ip_address
-# }
 
 
-
-
-data "azurerm_public_ip" "data_jump_public_ip" {
-  name                = azurerm_public_ip.jump_server_ip.name
-  resource_group_name = var.rc-name
-}
 
 output "jump_public_ip" {
-  value = data.azurerm_public_ip.data_jump_public_ip.ip_address
+  value = data.azurerm_public_ip.jump_server_ip_data.ip_address
 }
 
 
