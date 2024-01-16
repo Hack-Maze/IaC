@@ -61,7 +61,7 @@ resource "null_resource" "setup_ansible" {
 
 
 
-resource "null_resource" "setup_ansible" {
+resource "null_resource" "setup_cluster" {
 
   provisioner "remote-exec" {
    inline = [
