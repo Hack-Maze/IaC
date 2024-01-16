@@ -36,13 +36,13 @@ resource "null_resource" "transfer_hosts_file" {
   inline = ["sudo mv /tmp/jump_hosts /etc/hosts"]
   }
  
-  provisioner "remote-exec" {
-  inline = ["echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc";
-            "echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc";
-            "echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc";
-            "source $HOME/.bashrc";
-            ]
-  }
+    provisioner "remote-exec" {
+    inline = ["echo \"alias control='ssh -i $HOME/.ssh/control_private_key.pem $USER@control'\" >> $HOME/.bashrc",
+              "echo \"alias worker1='ssh -i $HOME/.ssh/worker1_private_key.pem $USER@worker1'\" >> $HOME/.bashrc",
+              "echo \"alias worker2='ssh -i $HOME/.ssh/worker2_private_key.pem $USER@worker2'\" >> $HOME/.bashrc",
+              ". $HOME/.bashrc"
+              ]
+    }
   
   connection {
     type       = "ssh"
@@ -50,6 +50,5 @@ resource "null_resource" "transfer_hosts_file" {
     private_key = local_file.jump_private_key.content // replace with the correct path to your private key
     host       = var.jump_public_ip // replace with the public IP of your jump server
   }
-
 
 }
