@@ -62,7 +62,7 @@ resource "null_resource" "setup_ansible" {
 
 
 resource "null_resource" "setup_cluster" {
-
+  depends_on = [null_resource.setup_ansible]
   provisioner "remote-exec" {
    inline = [
     "ansible-playbook -i ~/ansible/inventory.txt ~/ansible/k8s-setup/*.yml"
