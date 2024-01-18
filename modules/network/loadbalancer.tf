@@ -62,11 +62,12 @@ resource "azurerm_lb_rule" "httprule" {
 } 
 
 
-resource "azurerm_lb_outbound_rule" "example" {
+resource "azurerm_lb_outbound_rule" "Outbound" {
   name                    = "OutboundRule"
   loadbalancer_id         = azurerm_lb.hm-lb.id
   protocol                = "Tcp"
   backend_address_pool_id = azurerm_lb_backend_address_pool.lb-backend-pool.id
+  disable_outbound_snat          = false
 
   frontend_ip_configuration {
     name = "LB-IP"
