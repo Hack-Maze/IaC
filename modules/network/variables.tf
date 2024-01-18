@@ -43,3 +43,23 @@ variable "rc-tags" {
  type       = map(string)
  default    = {}
 }
+
+
+variable "control_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "worker1_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+
+variable "worker2_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
