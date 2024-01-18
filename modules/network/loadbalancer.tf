@@ -55,9 +55,8 @@ resource "azurerm_lb_rule" "httprule" {
   protocol                       = "Tcp"
   frontend_port                  = 80
   backend_port                   = 80
-  frontend_ip_configuration {
-    name = "LB-IP"
-  }}
+  frontend_ip_configuration_name = "LB-IP"
+}
 
 
 resource "azurerm_lb_outbound_rule" "example" {
