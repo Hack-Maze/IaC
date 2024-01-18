@@ -15,9 +15,10 @@ data "azurerm_public_ip" "jump_server_ip_data" {
 
 
 resource "azurerm_public_ip" "loadbalancer_ip" {
- name               = "loadbalancer_ip"
+ name                = "LB-IP"
  location            = var.rc-location
  resource_group_name = var.rc-name
- allocation_method  = "Static"
+ allocation_method   = "Static"
+ sku                 = "Standard"
  tags                = var.rc-tags
 }

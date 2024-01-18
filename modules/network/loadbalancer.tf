@@ -11,6 +11,7 @@ resource "azurerm_lb" "hm-lb" {
 }
 
 
+
 resource "azurerm_lb_backend_address_pool" "lb-backend-pool" {
  loadbalancer_id = azurerm_lb.hm-lb.id
  name            = "BackendPool"
