@@ -57,10 +57,9 @@ resource "azurerm_lb_rule" "httprule" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "LB-IP"
-  backend_address_pool_id        = azurerm_lb_backend_address_pool.lb-backend-pool.id
+  backend_address_pool_ids       = azurerm_lb_backend_address_pool.lb-backend-pool.id
   probe_id                       = azurerm_lb_probe.httpPorbe.id
   disable_outbound_snat          = false
-
 } 
 
 
