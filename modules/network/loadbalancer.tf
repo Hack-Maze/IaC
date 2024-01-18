@@ -57,7 +57,7 @@ resource "azurerm_lb_rule" "httprule" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "LB-IP"
-  disable_outbound_snat          = false
+
 
 } 
 
@@ -67,8 +67,6 @@ resource "azurerm_lb_outbound_rule" "Outbound" {
   loadbalancer_id         = azurerm_lb.hm-lb.id
   protocol                = "Tcp"
   backend_address_pool_id = azurerm_lb_backend_address_pool.lb-backend-pool.id
-  disable_outbound_snat          = false
-
   frontend_ip_configuration {
     name = "LB-IP"
   }
