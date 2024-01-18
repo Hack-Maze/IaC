@@ -11,13 +11,17 @@ variable "hackmaze_subnet_01_address_rang" {
 }
 
 
-variable "dns_name" {                                   # ask
+variable "jump_dns_name" {                                   # ask
   description = "dns name of the jump virtual machine"
   type        = string
   default     = "hm-jump-server"  # Update with your preferred default size
 }
 
-
+variable "hm_dns_name" {                                   # ask
+  description = "dns name of the jump virtual machine"
+  type        = string
+  default     = "hm"  # Update with your preferred default size
+}
 
 
 

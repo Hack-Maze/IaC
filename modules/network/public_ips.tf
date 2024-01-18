@@ -3,7 +3,7 @@ resource "azurerm_public_ip" "jump_server_ip" {
  location            = var.rc-location
  resource_group_name = var.rc-name
  allocation_method   = "Static"
- domain_name_label   = "${var.dns_name}"
+ domain_name_label   = "${var.jump_dns_name}"
  tags                = var.rc-tags
 }
 
@@ -20,5 +20,6 @@ resource "azurerm_public_ip" "loadbalancer_ip" {
  resource_group_name = var.rc-name
  allocation_method   = "Static"
  sku                 = "Standard"
+ domain_name_label   = "${var.hm_dns_name}"
  tags                = var.rc-tags
 }
