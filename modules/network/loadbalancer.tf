@@ -4,6 +4,7 @@ resource "azurerm_lb" "hm-lb" {
  resource_group_name = var.rc-name
  sku                = "Standard"
 
+
  frontend_ip_configuration {
    name                = "LB-IP"
    public_ip_address_id = azurerm_public_ip.loadbalancer_ip.id
@@ -56,7 +57,9 @@ resource "azurerm_lb_rule" "httprule" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "LB-IP"
-}
+  disable_outbound_snat          = false
+
+} 
 
 
 resource "azurerm_lb_outbound_rule" "example" {
