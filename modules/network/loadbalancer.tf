@@ -43,14 +43,14 @@ resource "azurerm_lb_backend_address_pool_address" "worker2" {
 }
 
 
-resource "azurerm_lb_probe" "httpPorbe" {
+resource "azurerm_lb_probe" "httpPorbe30080" {
   loadbalancer_id = azurerm_lb.hm-lb.id
-  name            = "httpPorbe80"
+  name            = "httpPorbe30080"
   port            = 30080
 }
 
 
-resource "azurerm_lb_rule" "httprule" {
+resource "azurerm_lb_rule" "httprule30080" {
   loadbalancer_id                = azurerm_lb.hm-lb.id
   name                           = "httpRule"
   protocol                       = "Tcp"
@@ -58,27 +58,27 @@ resource "azurerm_lb_rule" "httprule" {
   backend_port                   = 30080
   frontend_ip_configuration_name = "LB-IP"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb-backend-pool.id]
-  probe_id                       = azurerm_lb_probe.httpPorbe.id
+  probe_id                       = azurerm_lb_probe.httpPorbe30080.id
   disable_outbound_snat         = true
 } 
 
 
-resource "azurerm_lb_probe" "httpPorbe" {
+resource "azurerm_lb_probe" "httpPorbe30443" {
   loadbalancer_id = azurerm_lb.hm-lb.id
-  name            = "httpPorbe80"
+  name            = "httpPorbe30443"
   port            = 30443
 }
 
 
-resource "azurerm_lb_rule" "httprule" {
+resource "azurerm_lb_rule" "httprule30443" {
   loadbalancer_id                = azurerm_lb.hm-lb.id
   name                           = "httpRule"
   protocol                       = "Tcp"
-  frontend_port                  = 80
+  frontend_port                  = 443
   backend_port                   = 30443
   frontend_ip_configuration_name = "LB-IP"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb-backend-pool.id]
-  probe_id                       = azurerm_lb_probe.httpPorbe.id
+  probe_id                       = azurerm_lb_probe.httpPorbe30443.id
   disable_outbound_snat         = true
 } 
 
@@ -94,12 +94,12 @@ resource "azurerm_lb_outbound_rule" "Outbound" {
 }
 
 
-resource "azurerm_lb_nat_rule" "nat_rule" {
- resource_group_name            = azurerm_resource_group.rg.name
- loadbalancer_id                = azurerm_lb.lb.id
- name                           = "SSHAccess"
+resource "azurerm_lb_nat_rule" "postgres_rule" {
+ resource_group_name            = var.rc-name
+ loadbalancer_id                = azurerm_lb.hm-lb.id
+ name                           = "postgresAccess"
  protocol                       = "Tcp"
  frontend_port                  = 5432
  backend_port                   = 30543
- frontend_ip_configuration_name = "PublicFrontend"
+ frontend_ip_configuration_name = "LB-IP"
 }
