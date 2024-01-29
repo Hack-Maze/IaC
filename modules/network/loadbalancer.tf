@@ -46,7 +46,7 @@ resource "azurerm_lb_backend_address_pool_address" "worker2" {
 resource "azurerm_lb_probe" "httpPorbe" {
   loadbalancer_id = azurerm_lb.hm-lb.id
   name            = "httpPorbe80"
-  port            = 80
+  port            = 30080
 }
 
 
@@ -55,7 +55,27 @@ resource "azurerm_lb_rule" "httprule" {
   name                           = "httpRule"
   protocol                       = "Tcp"
   frontend_port                  = 80
-  backend_port                   = 80
+  backend_port                   = 30080
+  frontend_ip_configuration_name = "LB-IP"
+  backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb-backend-pool.id]
+  probe_id                       = azurerm_lb_probe.httpPorbe.id
+  disable_outbound_snat         = true
+} 
+
+
+resource "azurerm_lb_probe" "httpPorbe" {
+  loadbalancer_id = azurerm_lb.hm-lb.id
+  name            = "httpPorbe80"
+  port            = 30443
+}
+
+
+resource "azurerm_lb_rule" "httprule" {
+  loadbalancer_id                = azurerm_lb.hm-lb.id
+  name                           = "httpRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 30443
   frontend_ip_configuration_name = "LB-IP"
   backend_address_pool_ids       = [azurerm_lb_backend_address_pool.lb-backend-pool.id]
   probe_id                       = azurerm_lb_probe.httpPorbe.id
@@ -71,4 +91,15 @@ resource "azurerm_lb_outbound_rule" "Outbound" {
   frontend_ip_configuration {
     name = "LB-IP"
   }
+}
+
+
+resource "azurerm_lb_nat_rule" "nat_rule" {
+ resource_group_name            = azurerm_resource_group.rg.name
+ loadbalancer_id                = azurerm_lb.lb.id
+ name                           = "SSHAccess"
+ protocol                       = "Tcp"
+ frontend_port                  = 5432
+ backend_port                   = 30543
+ frontend_ip_configuration_name = "PublicFrontend"
 }
