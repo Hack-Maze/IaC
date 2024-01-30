@@ -20,6 +20,7 @@ resource "azurerm_lb_backend_address_pool" "lb-backend-pool" {
 
 
 
+
 resource "azurerm_lb_backend_address_pool_address" "contorl" {
   name                    = "control"
   backend_address_pool_id = azurerm_lb_backend_address_pool.lb-backend-pool.id
@@ -94,6 +95,20 @@ resource "azurerm_lb_outbound_rule" "Outbound" {
 }
 
 
+
+
+resource "azurerm_lb_backend_address_pool" "lb-postgres-pool" {
+ loadbalancer_id = azurerm_lb.hm-lb.id
+ name            = "PostgresPool"
+}
+
+resource "azurerm_lb_backend_address_pool_address" "controlpostgres" {
+  name                    = "controlpostgres"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.lb-postgres-pool.id
+  virtual_network_id      = azurerm_virtual_network.hackmaze-virtual-net.id
+  ip_address              = var.control_static_private_ip
+}
+
 resource "azurerm_lb_nat_rule" "postgres_rule" {
  resource_group_name            = var.rc-name
  loadbalancer_id                = azurerm_lb.hm-lb.id
@@ -102,6 +117,6 @@ resource "azurerm_lb_nat_rule" "postgres_rule" {
  frontend_port_start            = 5432
  frontend_port_end              = 5432
  backend_port                   = 30543
- backend_address_pool_id        = azurerm_lb_backend_address_pool.lb-backend-pool.id
+ backend_address_pool_id        = azurerm_lb_backend_address_pool.lb-postgres-pool.id
  frontend_ip_configuration_name = "LB-IP"
 }
