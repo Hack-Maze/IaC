@@ -52,7 +52,7 @@ resource "azurerm_lb_probe" "httpPorbe30080" {
 
 resource "azurerm_lb_rule" "httprule30080" {
   loadbalancer_id                = azurerm_lb.hm-lb.id
-  name                           = "httpRule"
+  name                           = "httpRule80"
   protocol                       = "Tcp"
   frontend_port                  = 80
   backend_port                   = 30080
@@ -72,7 +72,7 @@ resource "azurerm_lb_probe" "httpPorbe30443" {
 
 resource "azurerm_lb_rule" "httprule30443" {
   loadbalancer_id                = azurerm_lb.hm-lb.id
-  name                           = "httpRule"
+  name                           = "httpRule443"
   protocol                       = "Tcp"
   frontend_port                  = 443
   backend_port                   = 30443
