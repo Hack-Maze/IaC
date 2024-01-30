@@ -2,9 +2,9 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.78.0"
+      version = "3.87.0"
     }
-  }
+  } 
 }
 
 provider "azurerm" {
@@ -66,6 +66,11 @@ module "network" {
   rc-name     = local.rc-name
   rc-location = local.rc-location
   rc-tags     = local.rc-tags
+
+
+  control_static_private_ip = local.control_static_private_ip
+  worker1_static_private_ip = local.worker1_static_private_ip
+  worker2_static_private_ip = local.worker2_static_private_ip
 }
 
 module "compute" {

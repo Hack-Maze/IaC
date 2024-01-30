@@ -15,17 +15,9 @@ output "jump_public_ip_id" {
   value = azurerm_public_ip.jump_server_ip.id
 }
 
-
-
-
 output "jump_public_ip" {
   value = data.azurerm_public_ip.jump_server_ip_data.ip_address
 }
-
-
-
-
-
 
 
 output "hackmaze_vnet_address_range" {
