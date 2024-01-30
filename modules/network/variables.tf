@@ -20,7 +20,7 @@ variable "jump_dns_name" {                                   # ask
 variable "hm_dns_name" {                                   # ask
   description = "dns name of the jump virtual machine"
   type        = string
-  default     = "hm"  # Update with your preferred default size
+  default     = "hm-1337"  # Update with your preferred default size
 }
 
 
