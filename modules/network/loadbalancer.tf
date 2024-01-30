@@ -99,7 +99,8 @@ resource "azurerm_lb_nat_rule" "postgres_rule" {
  loadbalancer_id                = azurerm_lb.hm-lb.id
  name                           = "postgresAccess"
  protocol                       = "Tcp"
- frontend_port                  = 5432
+ frontend_port_start            = 5432
+ frontend_port_end              = 5432
  backend_port                   = 30543
  backend_address_pool_id        = azurerm_lb_backend_address_pool.lb-backend-pool.id
  frontend_ip_configuration_name = "LB-IP"
