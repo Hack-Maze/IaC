@@ -85,9 +85,9 @@ resource "azurerm_network_security_rule" "NodePort_control_rule" {
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
-  destination_port_range      = "3000-32767"
+  destination_port_range      = "30000-32767"
   source_port_range           = "*"
-  source_address_prefix       = var.hackmaze_vnet_address_range[0]
+  source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = var.rc-name
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
@@ -107,34 +107,34 @@ resource "azurerm_network_security_rule" "ssh_control_rule" {
   network_security_group_name = azurerm_network_security_group.control-sg-01.name
 }
 
-resource "azurerm_network_security_rule" "Allow_Api_8080" {
-  name                        = "AllowAPI8080"
-  priority                    = 107
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  destination_port_range      = "8080"
-  source_port_range           = "*"
-  source_address_prefix       = var.hackmaze_vnet_address_range[0]
-  destination_address_prefix  = "*"
-  resource_group_name         = var.rc-name
-  network_security_group_name = azurerm_network_security_group.control-sg-01.name
-}
+# resource "azurerm_network_security_rule" "Allow_Api_8080" {
+#   name                        = "AllowAPI8080"
+#   priority                    = 107
+#   direction                   = "Inbound"
+#   access                      = "Allow"
+#   protocol                    = "Tcp"
+#   destination_port_range      = "8080"
+#   source_port_range           = "*"
+#   source_address_prefix       = var.hackmaze_vnet_address_range[0]
+#   destination_address_prefix  = "*"
+#   resource_group_name         = var.rc-name
+#   network_security_group_name = azurerm_network_security_group.control-sg-01.name
+# }
 
 
-resource "azurerm_network_security_rule" "Allow_EndUser_443" {
-  name                        = "AllowEndUser443"
-  priority                    = 108
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  destination_port_range      = "443"
-  source_port_range           = "*"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = var.rc-name
-  network_security_group_name = azurerm_network_security_group.control-sg-01.name
-}
+# resource "azurerm_network_security_rule" "Allow_EndUser_443" {
+#   name                        = "AllowEndUser443"
+#   priority                    = 108
+#   direction                   = "Inbound"
+#   access                      = "Allow"
+#   protocol                    = "Tcp"
+#   destination_port_range      = "443"
+#   source_port_range           = "*"
+#   source_address_prefix       = "*"
+#   destination_address_prefix  = "*"
+#   resource_group_name         = var.rc-name
+#   network_security_group_name = azurerm_network_security_group.control-sg-01.name
+# }
 
 
 resource "azurerm_network_security_rule" "Allowfannel8285" {

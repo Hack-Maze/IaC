@@ -11,13 +11,17 @@ variable "hackmaze_subnet_01_address_rang" {
 }
 
 
-variable "dns_name" {                                   # ask
+variable "jump_dns_name" {                                   # ask
   description = "dns name of the jump virtual machine"
   type        = string
   default     = "hm-jump-server"  # Update with your preferred default size
 }
 
-
+variable "hm_dns_name" {                                   # ask
+  description = "dns name of the jump virtual machine"
+  type        = string
+  default     = "hm-1337"  # Update with your preferred default size
+}
 
 
 
@@ -42,4 +46,24 @@ variable "rc-tags" {
  description = "Description of the variable"
  type       = map(string)
  default    = {}
+}
+
+
+variable "control_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "worker1_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+
+variable "worker2_static_private_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
 }

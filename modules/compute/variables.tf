@@ -137,3 +137,17 @@ variable "worker_sg_id" {
  type       = string
  default    = ""
 }
+
+
+
+variable "loadbalancer_ip_id" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
+
+variable "loadbalancer_ip" {
+ description = "Description of the variable"
+ type       = string
+ default    = ""
+}
