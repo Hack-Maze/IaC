@@ -9,10 +9,18 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
 
+    - name: Install spacectl
+      uses: spacelift-io/setup-spacectl@main
+  
     - name: Destroy Spacelift Stack
       run: spacectl stack destroy --id hackmaze --auto-confirm 
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://hack-maze.app.spacelift.io
         SPACELIFT_API_KEY_ID: ${{ secrets.SPACELIFT_API_KEY_ID }}
         SPACELIFT_API_KEY_SECRET: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
+
+
