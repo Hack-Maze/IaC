@@ -17,7 +17,7 @@ jobs:
       uses: spacelift-io/setup-spacectl@main
   
     - name: Destroy Spacelift Stack
-      run: spacectl stack delete --id hackmaze --auto-confirm 
+      run: spacectl stack delete -s hackmaze  --force
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://hack-maze.app.spacelift.io
         SPACELIFT_API_KEY_ID: ${{ secrets.SPACELIFT_API_KEY_ID }}
