@@ -14,26 +14,36 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Terraform Init
-      run: terraform init
+    - name: Install spacectl
+      uses: spacelift-io/setup-spacectl@v1
+  
+    - name: Deploy infrastructure
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        SPACELIFT_API_KEY_ENDPOINT: https://hack-maze.app.spacelift.io
+        SPACELIFT_API_KEY_ID: ${{ secrets.SPACELIFT_API_KEY_ID }}
+        SPACELIFT_API_KEY_SECRET: ${{ secrets.SPACELIFT_API_KEY_SECRET }}
+      run: spacectl stack deploy --id hackmaze
 
-    - name: Terraform Plan
-      run: terraform plan
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    # - name: Terraform Init
+    #   run: terraform init
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    #     ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    # - name: Terraform Plan
+    #   run: terraform plan
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    #     ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
+    #   env:
+    #     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+    #     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    #     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    #     ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
