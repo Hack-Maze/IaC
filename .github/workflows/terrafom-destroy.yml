@@ -18,7 +18,7 @@ jobs:
       uses: spacelift-io/setup-spacectl@main
   
     - name: Delete Spacelift Stack
-      run: spacectl stack delete hackmaze --force
+      run: spacectl stack task --id 01HQ9EDHNX1V4CMFJR92A9D8B0
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://hack-maze.app.spacelift.io
         SPACELIFT_API_KEY_ID: ${{ secrets.SPACELIFT_API_KEY_ID }}
