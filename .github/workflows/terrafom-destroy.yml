@@ -17,7 +17,7 @@ jobs:
     - name: Install spacectl
       uses: spacelift-io/setup-spacectl@main
   
-    - name: Deploy infrastructure
+    - name: Delete Spacelift Stack
       run: spacectl stack delete hackmaze --force
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://hack-maze.app.spacelift.io
