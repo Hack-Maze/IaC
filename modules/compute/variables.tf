@@ -5,8 +5,15 @@ variable "control_vm_size" {
   default     = "Standard_D2s_v3"  # Update with your preferred default size  
 }
 
+# 2core 4 mem
+variable "worker1_vm_size" {
+  description = "Size of the control virtual machine"
+  type        = string
+  default     = "Standard_D2s_v3"  # Update with your preferred default size
+}
+
 # 1 core 1 mem
-variable "worker_vm_size" {
+variable "worker2_vm_size" {
   description = "Size of the control virtual machine"
   type        = string
   default     = "Standard_B1s"  # Update with your preferred default size
