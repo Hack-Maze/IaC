@@ -15,7 +15,7 @@ jobs:
       uses: hashicorp/setup-terraform@v1
 
     - name: Install spacectl
-      uses: spacelift-io/setup-spacectl@v1
+      uses: spacelift-io/setup-spacectl@main
   
     - name: Deploy infrastructure
       env:
