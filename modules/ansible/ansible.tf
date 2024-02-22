@@ -18,7 +18,7 @@ worker2
 ansible_python_interpreter=/usr/bin/python3
 ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 ansible_user=${var.admin_username}
-EOF
+EOF 
 }
 
 
@@ -33,7 +33,7 @@ resource "local_file" "ansible_inventory_file" {
 resource "null_resource" "setup_ansible" {
 
  provisioner "remote-exec" {
-   inline = ["mkdir /home/hackmaze-user/ansible" , "wget https://github.com/Hack-Maze/ansible/archive/refs/heads/main.tar.gz -O - | tar -xz -C /home/hackmaze-user/ansible --strip-components=2"]
+   inline = ["git clone https://github.com/Hack-Maze/ansible.git /home/hackmaze-user/ansible"]
   }
 
   provisioner "file" {
@@ -65,9 +65,7 @@ resource "null_resource" "setup_cluster" {
   depends_on = [null_resource.setup_ansible]
   provisioner "remote-exec" {
    inline = [
-    "ansible-playbook -i ~/ansible/inventory.txt ~/ansible/k8s-setup/kube-dependencies.yml",
-    "ansible-playbook -i ~/ansible/inventory.txt ~/ansible/k8s-setup/workers.yml",
-    "ansible-playbook -i ~/ansible/inventory.txt ~/ansible/k8s-setup/master.yml"
+    "ansible-playbook -i ~/ansible/inventory.txt ~/ansible/playbooks/main.yml"
    ]
   }
 

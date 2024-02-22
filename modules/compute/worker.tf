@@ -27,7 +27,7 @@ resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-01" {
   name                  = "hackmaze-worker-vm-01"
   location              = var.rc-location
   resource_group_name   = var.rc-name
-  size                  = var.worker_vm_size
+  size                  = var.worker_vm1_size
   admin_username        = var.admin_username
   network_interface_ids = [azurerm_network_interface.nic-worker1-01.id]
   availability_set_id   = azurerm_availability_set.worker-set.id
@@ -83,7 +83,7 @@ resource "azurerm_linux_virtual_machine" "hackmaze-worker-vm-02" {
   name                  = "hackmaze-worker-vm-02"
   location              = var.rc-location
   resource_group_name   = var.rc-name
-  size                  = var.worker_vm_size
+  size                  = var.worker2_vm_size
   admin_username        = var.admin_username
   network_interface_ids = [azurerm_network_interface.nic-worker2-01.id]
   availability_set_id   = azurerm_availability_set.worker-set.id
