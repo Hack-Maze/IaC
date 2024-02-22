@@ -45,7 +45,7 @@ resource "null_resource" "setup_ansible" {
    inline = [
     "sudo apt-get update -qq > /dev/null",
     "sudo apt-get install -y software-properties-common -qq > /dev/null",
-    "sudo apt-add-repository --yes --update ppa:ansible/ansible -qq > /dev/null",
+    "sudo apt-add-repository --yes --update ppa:ansible/ansible  > /dev/null",
     "sudo apt-get install -y ansible -qq > /dev/null"
    ]
   }
