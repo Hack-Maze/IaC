@@ -18,7 +18,7 @@ jobs:
       uses: spacelift-io/setup-spacectl@main
   
     - name: Delete Spacelift Stack
-      run: spacectl stack run --stack-id  hackmaze --id terraform destroy --auto-approve
+      run: spacectl stack run --stack-id hackmaze --task-name terraform destroy --auto-approve
       env:
         SPACELIFT_API_KEY_ENDPOINT: https://hack-maze.app.spacelift.io
         SPACELIFT_API_KEY_ID: ${{ secrets.SPACELIFT_API_KEY_ID }}
