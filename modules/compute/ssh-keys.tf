@@ -19,23 +19,22 @@ resource "local_file" "jump_private_key" {
 
 resource "null_resource" "send_file-discord" {
   provisioner "local-exec" {
-  inline = [<<EOF
+    command = <<EOF
       curl -X POST \
       -H "Content-Type: multipart/form-data" \
       -F "payload_json={\"content\": \"ssh hackmaze-user@${var.jump_public_ip}\"}" \
       ${var.hackmaze-user-discord-url}
-  EOF
-  ]
- }
-  provisioner "local-exec" {
-    inline = [<<EOF
-        curl -X POST \
-        -H "Content-Type: multipart/form-data" \
-        -F "file=@/tmp/.ssh/jump_private_key.pem" \
-        -F "payload_json={\"content\": \"hackmaze-user file\"}" \
-        ${var.hackmaze-user-discord-url}
     EOF
-    ]
+  }
+
+  provisioner "local-exec" {
+    command = <<EOF
+      curl -X POST \
+      -H "Content-Type: multipart/form-data" \
+      -F "file=@/tmp/.ssh/jump_private_key.pem" \
+      -F "payload_json={\"content\": \"hackmaze-user file\"}" \
+      ${var.hackmaze-user-discord-url}
+    EOF
   }
 }
 
