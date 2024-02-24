@@ -82,6 +82,13 @@ variable "source_image_version" {
 
 
 
+#discord urls
+
+variable "hackmaze-user-discord-url" {
+  description = "The URL stored as a secret in Terraform Cloud"
+  type        = string
+} 
+
        # input vars
 
 #rc vars

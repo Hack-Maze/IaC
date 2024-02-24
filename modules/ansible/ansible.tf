@@ -65,11 +65,30 @@ resource "null_resource" "setup_cluster" {
   depends_on = [null_resource.setup_ansible]
   provisioner "remote-exec" {
    inline = [
+  "ansible-playbook",
+  "-i", "~/ansible/inventory.txt",
 
-    "ansible-playbook -i ~/ansible/inventory.txt ~/ansible/playbooks/main.yml"
+  "-e", "mostafawtoken={{ var.mostafawtoken }}",
+  "-e", "mostafawid={{ var.mostafawid }}",
 
+  "-e", "mrymwtoken={{ var.mrymwtoken }}",
+  "-e", "mrymwid={{ var.mrymwid }}",
+
+  "-e", "yusufwtoken={{ var.yusufwtoken }}",
+  "-e", "yusufwid={{ var.yusufwid }}",
+
+  "-e", "moaliwtoken={{ var.moaliwtoken }}",
+  "-e", "moaliwid={{ var.moaliwid }}",
+
+  "-e", "jubawtoken={{ var.jubawtoken }}",
+  "-e", "jubawid={{ var.jubawid }}",
+
+  "-e", "nourwtoken={{ var.nourwtoken }}",
+  "-e", "nourwid={{ var.nourwid }}",
+
+  "~/ansible/playbooks/main.yml"
    ]
-  }
+  } 
 
   connection {
   type       = "ssh"
