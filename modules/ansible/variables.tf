@@ -37,82 +37,70 @@ variable "admin_username" {
 variable "mostafawtoken" {
  description = "The URL stored as a secret in Terraform Cloud"
  type        = string
- default    = ""
 } 
 
 
 variable "mostafawid" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 }
 
 
 variable "mrymwtoken" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 } 
 
 
 variable "mrymwid" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 }
 
 variable "yusufwtoken" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 } 
 
 
 variable "yusufwid" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 }
 
 variable "moaliwtoken" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 } 
 
 
 variable "moaliwid" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 }
 
 
 variable "jubawtoken" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 } 
 
 
 variable "jubawid" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 }
 
 
 variable "nourwtoken" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 } 
 
 
 variable "nourwid" {
   description = "The URL stored as a secret in Terraform Cloud"
   type        = string
-  default    = ""
 }
 
 

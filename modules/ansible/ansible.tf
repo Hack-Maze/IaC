@@ -59,21 +59,19 @@ resource "null_resource" "setup_ansible" {
 
 }
 
-
-
 resource "null_resource" "setup_cluster" {
   depends_on = [null_resource.setup_ansible]
+
   provisioner "remote-exec" {
-  inline = [
-      "ansible-playbook -i ~/ansible/inventory.txt -e mostafawtoken=${var.mostafawtoken} -e mostafawid=${var.mostafawid} -e mrymwtoken=${var.mrymwtoken} -e mrymwid=${var.mrymwid} -e yusufwtoken=${var.yusufwtoken} -e yusufwid=${var.yusufwid} -e moaliwtoken=${var.moaliwtoken} -e moaliwid=${var.moaliwid} -e jubawtoken=${var.jubawtoken} -e jubawid=${var.jubawid} -e nourwtoken=${var.nourwtoken} -e nourwid=${var.nourwid} ~/ansible/playbooks/main.yml"
+    inline = [
+      "bash -c 'ansible-playbook -i ~/ansible/inventory.txt -e mostafawtoken=${var.mostafawtoken} -e mostafawid=${var.mostafawid} -e mrymwtoken=${var.mrymwtoken} -e mrymwid=${var.mrymwid} -e yusufwtoken=${var.yusufwtoken} -e yusufwid=${var.yusufwid} -e moaliwtoken=${var.moaliwtoken} -e moaliwid=${var.moaliwid} -e jubawtoken=${var.jubawtoken} -e jubawid=${var.jubawid} -e nourwtoken=${var.nourwtoken} -e nourwid=${var.nourwid} ~/ansible/playbooks/main.yml'"
     ]
-  } 
+  }
 
   connection {
-  type       = "ssh"
-  user       = "hackmaze-user"
-  private_key = var.jump_private_key_content // replace with the correct path to your private key
-  host       = var.jump_public_ip // replace with the public IP of your jump server
- }
-
+    type        = "ssh"
+    user        = "hackmaze-user"
+    private_key = var.jump_private_key_content // Ensure this is correctly set
+    host        = var.jump_public_ip // Ensure this is correctly set
+  }
 }
