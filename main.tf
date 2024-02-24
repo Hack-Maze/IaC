@@ -52,8 +52,10 @@ locals {
   jump_sg_id    = module.security.jump_sg_id
   control_sg_id = module.security.control_sg_id
   worker_sg_id  = module.security.worker_sg_id
-module.ansible
+
+
   #ansible vars
+  
   mostafawtoken             = module.ansible.mostafawtoken
   mostafawid                = module.ansible.mostafawid
   mrymwtoken                = module.ansible.mrymwtoken
