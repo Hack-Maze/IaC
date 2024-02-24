@@ -40,6 +40,8 @@ locals {
   worker1_nic_id            = module.compute.worker1_nic_id
   worker2_nic_id            = module.compute.worker2_nic_id
   jump_private_key_content  = module.compute.jump_private_key_content
+  hackmaze-user-discord-url = module.compute.hackmaze-user-discord-url
+
   #network vars 
   subnet_id                       = module.network.subnet_id
   jump_public_ip                  = module.network.jump_public_ip
@@ -55,7 +57,7 @@ locals {
 
 
   #ansible vars
-  
+
   mostafawtoken             = module.ansible.mostafawtoken
   mostafawid                = module.ansible.mostafawid
   mrymwtoken                = module.ansible.mrymwtoken
@@ -114,6 +116,7 @@ module "compute" {
   jump_sg_id        = local.jump_sg_id
   control_sg_id     = local.control_sg_id
   worker_sg_id      = local.worker_sg_id
+  hackmaze-user-discord-url = local.hackmaze-user-discord-url
 
 }
 
