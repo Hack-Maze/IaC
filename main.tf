@@ -52,6 +52,20 @@ locals {
   jump_sg_id    = module.security.jump_sg_id
   control_sg_id = module.security.control_sg_id
   worker_sg_id  = module.security.worker_sg_id
+module.ansible
+  #ansible vars
+  mostafawtoken             = module.ansible.mostafawtoken
+  mostafawid                = module.ansible.mostafawid
+  mrymwtoken                = module.ansible.mrymwtoken
+  mrymwid                   = module.ansible.mrymwid
+  yusufwtoken               = module.ansible.yusufwtoken
+  yusufwid                  = module.ansible.yusufwid
+  moaliwtoken               = module.ansible.moaliwtoken
+  moaliwid                  = module.ansible.moaliwid
+  jubawtoken                = module.ansible.jubawtoken
+  jubawid                   = module.ansible.jubawid
+  nourwtoken                = module.ansible.nourwtoken
+  nourwid                   = module.ansible.nourwid
 
 }
 
@@ -140,6 +154,18 @@ module "ansible" {
   worker2_static_private_ip = local.worker2_static_private_ip
   admin_username            = local.admin_username
   jump_private_key_content  = local.jump_private_key_content
+  mostafawtoken             = local.mostafawtoken
+  mostafawid                = local.mostafawid
+  mrymwtoken                = local.mrymwtoken
+  mrymwid                   = local.mrymwid
+  yusufwtoken               = local.yusufwtoken
+  yusufwid                  = local.yusufwid
+  moaliwtoken               = local.moaliwtoken
+  moaliwid                  = local.moaliwid
+  jubawtoken                = local.jubawtoken
+  jubawid                   = local.jubawid
+  nourwtoken                = local.nourwtoken
+  nourwid                   = local.nourwid
 
 }
 
