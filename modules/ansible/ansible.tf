@@ -59,12 +59,63 @@ resource "null_resource" "setup_ansible" {
 
 }
 
+
+
+resource "null_resource" "create_group_vars_master" {
+  depends_on = [null_resource.setup_ansible]
+
+  triggers = {
+      mostafawid: var.mostafawid
+      mostafawtoken: var.mostafawtoken
+      mrymwid: var.mrymwid
+      mrymwtoken: var.mrymwtoken
+      yusufwid: var.yusufwid
+      yusufwtoken: var.yusufwtoken
+      moaliwid: var.moaliwid
+      moaliwtoken: var.moaliwtoken
+      jubawid: var.jubawid
+      jubawtoken: var.jubawtoken
+      nourwid: var.nourwid
+      nourwtoken: var.nourwtoken
+    }
+
+    provisioner "remote-exec" {
+    inline = [
+      "mkdir -p /home/hackmaze-user/ansible/group_vars",
+      " echo '${templatefile("${path.module}/master.yml.tpl", {
+      mostafawid=var.mostafawid
+      mostafawtoken=var.mostafawtoken
+      mrymwid=var.mrymwid,
+      mrymwtoken=var.mrymwtoken,
+      yusufwid=var.yusufwid,
+      yusufwtoken=var.yusufwtoken,
+      moaliwid=var.moaliwid,
+      moaliwtoken=var.moaliwtoken,
+      jubawid=var.jubawid,
+      jubawtoken=var.jubawtoken,
+      nourwid=var.nourwid,
+      nourwtoken=var.nourwtoken
+      })}' > /home/hackmaze-user/ansible/group_vars/master.yml"
+    ]
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "hackmaze-user"
+    private_key = var.jump_private_key_content // Ensure this is correctly set
+    host        = var.jump_public_ip // Ensure this is correctly set
+  }
+}
+
+
+
+
 resource "null_resource" "setup_cluster" {
   depends_on = [null_resource.setup_ansible]
 
   provisioner "remote-exec" {
     inline = [
-        "ansible-playbook -i ~/ansible/inventory.txt -e mostafawtoken=${var.mostafawtoken} -e mostafawid=${var.mostafawid} -e mrymwtoken=${var.mrymwtoken} -e mrymwid=${var.mrymwid} -e yusufwtoken=${var.yusufwtoken} -e yusufwid=${var.yusufwid} -e moaliwtoken=${var.moaliwtoken} -e moaliwid=${var.moaliwid} -e jubawtoken=${var.jubawtoken} -e jubawid=${var.jubawid} -e nourwtoken=${var.nourwtoken} -e nourwid=${var.nourwid} ~/ansible/playbooks/main.yml"
+        "ansible-playbook -i ~/ansible/inventory.txt  ~/ansible/playbooks/main.yml"
       ]
   }
 

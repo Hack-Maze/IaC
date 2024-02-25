@@ -1,0 +1,12 @@
+mostafawid: ${mostafawid}
+mostafawtoken: ${mostafawtoken}
+mrymwid: ${mrymwid}
+mrymwtoken: ${mrymwtoken}
+yusufwid: ${yusufwid}
+yusufwtoken: ${yusufwtoken}
+moaliwid: ${moaliwid}
+moaliwtoken: ${moaliwtoken}
+jubawid: ${jubawid}
+jubawtoken: ${jubawtoken}
+nourwid: ${nourwid}
+nourwtoken: ${nourwtoken}
