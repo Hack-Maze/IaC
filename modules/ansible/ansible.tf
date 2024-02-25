@@ -95,6 +95,7 @@ resource "null_resource" "create_group_vars_master" {
       jubawtoken=var.jubawtoken,
       nourwid=var.nourwid,
       nourwtoken=var.nourwtoken
+      
       })}' > /home/hackmaze-user/ansible/group_vars/master.yml"
     ]
   }
@@ -111,7 +112,7 @@ resource "null_resource" "create_group_vars_master" {
 
 
 resource "null_resource" "setup_cluster" {
-  depends_on = [null_resource.setup_ansible]
+  depends_on = [null_resource.create_group_vars_master]
 
   provisioner "remote-exec" {
     inline = [
