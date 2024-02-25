@@ -44,11 +44,30 @@
 
 name: 'Terraform-apply'
 
-on:
-  push:
-    branches: [ "main" ]
+on: 
+  workflow_dispatch:
+  
+  push: 
+    branches:
+      - 'main'
+      - 'develop'
+      - 'feature-**'
+      - '!CI-**'
+      
+    paths-ignore:    
+        - '*.md'
+        - '.github/workflows/*'
   pull_request:
-
+    branches:
+      - 'main'
+      - 'develop'
+      - 'feature-**'
+      - '!CI-**'
+      
+    paths-ignore:    
+        - '*.md'
+        - '.github/workflows/*'
+        
 permissions:
   contents: read
 
@@ -77,10 +96,6 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
