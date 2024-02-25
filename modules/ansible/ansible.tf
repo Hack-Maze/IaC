@@ -115,7 +115,7 @@ resource "null_resource" "setup_cluster" {
 
   provisioner "remote-exec" {
     inline = [
-        "ansible-playbook -i ~/ansible/inventory.txt  ~/ansible/playbooks/main.yml"
+        "ansible-playbook -i ~/ansible/inventory.txt  ~/ansible/playbooks/users/main.yml"
       ]
   }
 
