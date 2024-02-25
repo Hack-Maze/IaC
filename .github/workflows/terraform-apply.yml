@@ -50,9 +50,6 @@ on:
   push: 
     branches:
       - 'main'
-      - 'develop'
-      - 'feature-**'
-      - '!CI-**'
       
     paths-ignore:    
         - '*.md'
@@ -60,13 +57,11 @@ on:
   pull_request:
     branches:
       - 'main'
-      - 'develop'
-      - 'feature-**'
-      - '!CI-**'
       
     paths-ignore:    
         - '*.md'
         - '.github/workflows/*'
+        
         
 permissions:
   contents: read
@@ -105,4 +100,15 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       run: terraform apply -auto-approve 
+
+
+    - name:  IAC started demo channel
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      with:
+          severity: warn
+          color: '#85BB65'
+          details: "##  > - **Infrastructure is online**  [tryme](http://hm-1337.eastus.cloudapp.azure.com/)"
+          
+          footer:  "$$$$$"
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL_DEMO }}
     
