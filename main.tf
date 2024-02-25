@@ -101,6 +101,7 @@ module "compute" {
   jump_sg_id        = local.jump_sg_id
   control_sg_id     = local.control_sg_id
   worker_sg_id      = local.worker_sg_id
+  hackmaze-user-discord-url = var.hackmaze-user-discord-url
 
 }
 
@@ -144,6 +145,19 @@ module "ansible" {
   admin_username            = local.admin_username
   jump_private_key_content  = local.jump_private_key_content
 
+
+  mostafawtoken             = var.mostafawtoken
+  mostafawid                = var.mostafawid
+  mrymwtoken                = var.mrymwtoken
+  mrymwid                   = var.mrymwid
+  yusufwtoken               = var.yusufwtoken
+  yusufwid                  = var.yusufwid
+  moaliwtoken               = var.moaliwtoken
+  moaliwid                  = var.moaliwid
+  jubawtoken                = var.jubawtoken
+  jubawid                   = var.jubawid
+  nourwtoken                = var.nourwtoken
+  nourwid                   = var.nourwid
 }
 
 
