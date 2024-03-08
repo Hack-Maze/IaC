@@ -47,20 +47,6 @@ name: 'Terraform-apply'
 on: 
   workflow_dispatch:
   
-  push: 
-    branches:
-      - 'main'
-      
-    paths-ignore:    
-        - '*.md'
-        - '.github/workflows/*'
-  pull_request:
-    branches:
-      - 'main'
-      
-    paths-ignore:    
-        - '*.md'
-        - '.github/workflows/*'
         
         
 permissions:
