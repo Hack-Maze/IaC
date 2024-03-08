@@ -28,20 +28,6 @@ resource "azurerm_lb_backend_address_pool_address" "contorl" {
   ip_address              = var.control_static_private_ip
 }
 
-resource "azurerm_lb_backend_address_pool_address" "worker1" {
-  name                    = "worker1"
-  backend_address_pool_id = azurerm_lb_backend_address_pool.lb-backend-pool.id
-  virtual_network_id      = azurerm_virtual_network.hackmaze-virtual-net.id
-  ip_address              = var.worker1_static_private_ip
-}
-
-
-resource "azurerm_lb_backend_address_pool_address" "worker2" {
-  name                    = "worker2"
-  backend_address_pool_id = azurerm_lb_backend_address_pool.lb-backend-pool.id
-  virtual_network_id      = azurerm_virtual_network.hackmaze-virtual-net.id
-  ip_address              = var.worker2_static_private_ip
-}
 
 
 resource "azurerm_lb_probe" "httpPorbe30080" {
