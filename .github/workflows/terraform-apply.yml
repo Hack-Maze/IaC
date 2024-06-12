@@ -53,17 +53,45 @@ permissions:
   contents: read
 
 jobs:
+
+########################################################################################################
+
+  check_website:
+    runs-on: ubuntu-latest
+    outputs:
+      website_up: ${{ steps.check.outputs.website_up }}
+    steps:
+    - id: check
+      run: |
+        RESPONSE=$(curl --write-out '%{http_code}' --silent --output /dev/null http://hm-1337.eastus.cloudapp.azure.com/)
+        if [[ "$RESPONSE" =~ ^5 ]]; then
+          echo "::set-output name=website_up::false"
+        else
+          echo "::set-output name=website_up::true"
+        fi
+    - name: Save website status
+      uses: actions/upload-artifact@v2
+      with:
+        name: website-status
+        path: .
+      if: ${{ steps.check.outputs.website_up == 'true' }}
+
+
+############################################################################
+
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
-
+    if: needs.check_website.outputs.website_up == 'false'
+    needs: [check_website]
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
 
     steps:
+    
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
