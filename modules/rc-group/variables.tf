@@ -7,7 +7,7 @@ variable "name" {
 variable "location" {
   description = "The location of the Azure resource group"
   type        = string
-  default     = "East US"
+  default     = "Italy North"
 }
 
 variable "tags" {
