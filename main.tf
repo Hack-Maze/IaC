@@ -129,7 +129,7 @@ module "security" {
 
 module "ansible" {
   source = "./modules/ansible"  # Path to the compute module directory
-  depends_on = [module.security]
+  depends_on = [module.compute,module.network, module.security ]
   # Pass any required variables to the compute module
   # For example:
   # variable_name = value
