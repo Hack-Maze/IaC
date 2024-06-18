@@ -143,7 +143,7 @@ jobs:
       with:
           severity: warn
           color: '#85BB65'
-          details: "##  > - **Infrastructure is online**  [hm1337](https://hm-1337.eastus.cloudapp.azure.com/)    [org](http://hackmaze.0rg.us/)"
+          details: "##  > - **Infrastructure is online**  [hm1337](https://hm-1337.italynorth.cloudapp.azure.com/)    [org](http://hackmaze.0rg.us/)"
           
           footer:  "$$$$$"
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL_DEMO }}
